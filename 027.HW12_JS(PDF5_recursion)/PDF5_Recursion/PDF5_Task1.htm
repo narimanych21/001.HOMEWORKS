@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+	
+	//----------РЕКУРСИЯ------------
+    //Task1. Написать функцию возведения числа в степень.
+
+    function pwr(a,b){
+		return b==1 ? a: a*pwr(a,b-1) ;
+	}
+	alert(pwr(3,3));
+	
+	//Task2. Написать функцию поиска наибольшего общего делителя.
+	function nod(a,b){
+		return b==0 ? a: nod(b,a%b) ;
+	}
+	alert(nod(56,24));
+	
+	//Task3.Написать функцию для поиска максимальной цифры в числе.
+	function maxDigit(a){
+			return a<10 ? a : Math.trunc( Math.max(a % 10, maxDigit(a / 10)));		
+	}
+	alert(maxDigit(1949));
+	
+	//Task4.Написать функцию, которая определяет простое ли переданное число.
+	function isPrimeNumber(a,b=2){
+		return b>Math.sqrt(a)? true: a%b ? isPrimeNumber(a,++b):false;
+		
+	}
+		//alert(isPrimeNumber(643,2))
+	alert(isPrimeNumber(8573,2));
+	
+	//Task5. Написать функцию для вывода всех множителей 
+			//переданного числа в возрастающем порядке. 
+			//Например: число 18 – множители 2 * 3 * 3.	
+			// let arr=[];
+	 function factors(a,arr=[],b=2) {
+		if(b > Math.sqrt(a)){
+			arr.push(a);
+			return arr;
+		}else if(a%b==0){
+			arr.push(b);
+			factors(a/b,arr,b);
+		}else{
+			factors(a,arr,++b);
+		}
+		return arr.join("*");
+	 } 
+	 alert(factors(148));
+	//Task5.6.	Написать функцию, которая возвращает число Фибоначчи по переданному порядковому номеру. 
+				//Числа Фибоначчи: 1, 1, 2, 3, 5, 8, 13… Ряд основывается на том, что каждое число равно сумме двух предыдущих чисел. 
+				//Например: порядковый номер 3 – число 2, порядковый номер 6 – число 8.
+	function fibonacci(a){
+	    if (a<2){
+			return a;
+		}else{
+			return fibonacci(a-1)+fibonacci(a-2);
+		} 
+	}
+	 alert(fibonacci(6));
+	
+    </script>
+</body>
+</html>

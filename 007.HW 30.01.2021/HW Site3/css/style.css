@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+
+:root {
+  --zeleniy: #a2ca28;
+  --krasniy: #fd634e;
+}
+
+/* HEADER */
+header {
+	position: relative;
+	height: 100vh;
+	background: url('../img/headerbg.jpg') center/cover;
+	color: #fff;
+	text-transform: uppercase;
+}
+footer {
+	height: 100vh;
+	background-color: #0d1119;
+	color: #fff;
+}
+
+#logo, #menu, #topic { 
+	position: absolute; 
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+#menu a, #subtitle a,h2,.gfield1{ color:#fff;}
+
+#logo {	top: 40px;}
+#menu {	top: 100px;}
+#topic {bottom: 130px;}
+#menu a {font: .8em Montserrat, sans-serif;}
+
+#bunner1{
+	text-align:center;
+	Padding:245px 0 0 0;
+	font: Montserrat, sans-serif;
+}
+#bunner p{font: 1em Montserrat, sans-serif;}
+h1 {
+	font: 2em Poppins, sans-serif;
+	/*white-space: nowrap;*/
+}
+h5 {
+	font: .93em Poppins, sans-serif;
+	text-align: right;
+	padding: 0 20px 0 0;
+}
+
+h2{
+	font: 1.5em Poppins, sans-serif;
+	text-align: left;
+	padding: 0 24px 0 0;
+	white-space: nowrap;
+}
+
+
+
+h1 span { color: var(--zeleniy) }
+h5 span { color: var(--krasniy) }
+
+.zeleniybg { background: var(--zeleniy) }
+.krasniybg { background: var(--krasniy) }
+.beliybg { background: #fff }
+.row { padding: 90px 0 }
+.col { padding: 20px 10px }
+.h50 { height: 50vh }
+.h100 { height: 100vh }
+
+
+.white{	color:#fff}
+.grey{color:#656e74}
+.lightgrey{#e3e9ea}
+.footergrey{#8297a7}
+
+.wfield{
+	text-align:center;
+	padding :55px 55px 100px 55px;	
+}
+
+
+.wfield h6{
+	font: .88em Poppins, sans-serif;
+	white-space: nowrap;
+	color: #fd634e;
+	text-transform: uppercase; 
+}
+.wfield h3{
+	font: 2em Poppins, sans-serif;
+	color: var(--zeleniy);
+	text-transform: uppercase; 
+}
+.wfield p{
+	font: 0.88em Poppins, sans-serif;
+	color: #656e74;
+	padding:75px 0 0 0 ;
+}
+.wfield  a{
+	font: 0.88em Poppins, sans-serif;
+	color: var(--zeleniy);
+}
+
+.wfield  a:hover{color:#bfff00;}
+.wfield i{color:#e3e9ea}
+.alright{align:right}
+
+.gfield1{
+	text-align:center;
+	padding :55px 55px 100px 55px;	
+}
+
+
+.gfield1 h1,.gfield1 h3,.gfield1 h6{text-transform: uppercase;}
+.gfield1 h1 {font: 2em Poppins, sans-serif;}
+
+.gfield1 h6{
+	font: .88em Poppins, sans-serif;
+	text-transform: uppercase; 
+}
+ .gfield1 h3{
+	font: 2em Poppins, sans-serif; 
+	text-transform: uppercase; 
+}
+.gfield1 p{
+	font: 0.88em Poppins, sans-serif;
+	padding:40px 0 0 0 ;
+}
+
+.ftr h6{font: 1em Poppins, sans-serif;}
+.ftr p{font: .88em Poppins, sans-serif;}
+
+form input{
+	margin:10 px;
+	border:1px;
+	border-radius:3px;
+}
+
+
+#fitness {
+	background: url('../img/fitness.jpg') center/cover; 
+	vertical-align: bottom;
+	color;#fff;
+}
+#yourbody { background: url('../img/yourbody.jpg') center/cover; }
+#lifestyle { background: url('../img/lifestyle.jpg') center/cover; }
+#summer{background: url('../img/summer.jpg') center/cover;}
+#grape{background: url('../img/grape.jpg') center/cover;}
+#mango{background: url('../img/mango.jpg') center/cover;}
+#bunner1{background: url('../img/bunner1.jpg') top/cover;}
+
+@media only screen and (min-width: 768px) {
+	.container {
+		max-width: 1180px;
+		margin: auto;
+	}
+	
+	
+	h1 { font-size: 2.5em }
+	#logo, #menu, #topic { 
+		left: inherit;
+		transform: inherit;
+	}
+	#logo { left: 50px }
+	#menu { 
+		top: 60px; 
+		right: 60px;
+	}
+	#menu li { 
+		display: inline-block;
+		margin: 0 30px;
+	}
+	#topic { left: 115px }
+	
+	.clearfix::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	.col {
+		float: left;
+		width: 24%;
+		margin: 0 1% 0 0;
+	
+	}
+	
+	
+
+	.col:last-child {
+		margin: 0;
+	}
+	
+	.col2 {
+		float: left;
+		margin: 0 5% 0 0;
+	
+	}
+	
+	
+	#col21{width:30%;}
+	#col22{width:30%;}
+	#col23{width:22%;}
+	.w1 { width: 34% }
+	.w2 { width: 66% }
+	.fleft { float: left }
+	.fright { float: right }
+	
+	#undergrape{
+	padding:55px 45px 0 40px;
+	text-align:left;
+	}
+	
+	.gfield1{
+	text-align:left;
+	padding :64px 105px 0 65px;	
+	}
+	}
+	
+	.gfield1 h3{}
+	.ftr{
+		color:#8297a7;
+	}
+	#input1{width:202px;}
+	#input2{width:345px;}
+	#input3{
+		width:185px;
+		background-color: var(--zeleniy) ;
+		padding:0;
+}
+	form{
+		padding:50px 0 20px 30%;
+	}
+	form input{
+	height:50px;
+	padding: 0 0 0 25px;
+	margin:10 px;
+	border:1px;
+	border-radius: 3px;
+}
+	
+
+
+
+

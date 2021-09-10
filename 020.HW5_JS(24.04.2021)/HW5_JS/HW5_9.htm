@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW5_9JS</title>
+        <style>
+            table {border-collapse: collapse;}
+            td { width: 100px; height: 30px; text-align: left;}
+        </style>
+    </head>
+    <body>
+        <table id="tbl"></table>
+        <script>
+            const tbl = document.getElementById("tbl");
+            let kod = "";
+			for(let i= 1; i <= 10; i++){
+                kod += "<tr>"
+                for(let j = 2; j <= 9; j++) {
+                    kod += "<td>" + j +  " ✕ "  + i + " = "  +  eval(i*j) + "</td>";
+                }
+                kod += "</tr>";
+            } 
+            tbl.innerHTML = kod;
+        </script>
+    </body>
+</html>

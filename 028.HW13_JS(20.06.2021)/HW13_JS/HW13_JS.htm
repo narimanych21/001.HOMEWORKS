@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+	<script>
+
+
+//Task1. Написать функцию, которая принимает строку и выводит
+// статистику о ней: количество букв, количество цифр и
+// количество других знаков.
+
+		function counting(s) {
+			let counter = { letters: 0, numbers: 0, othersSymbols: 0 };
+			let enAlp = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+			let ruAlp = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'ъ', 'э', 'ю', 'я'];
+			let numbrs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+			for (let simb of s) {
+				if (enAlp.includes(simb.toLowerCase()) || ruAlp.includes(simb.toLowerCase())) {
+					counter.letters += 1;
+				} else if (numbrs.includes(simb)) {
+					counter.numbers += 1;
+				} else {
+					counter.othersSymbols += 1;
+				}
+			}
+			return Object.entries(counter).join(" ;  ").replaceAll(",", "-")
+		}
+
+		let wrd1 = prompt('Task1\nНаписать функцию, которая принимает строку ' +
+			'и выводит     статистику о ней: количество букв,' +
+			' количество цифр и количество других знаков.' +
+			'\nВведите строку со смешанными символами','asЯФ1234.?//Ч');
+
+		alert ('input    : '+ wrd1 +'\noutput  :'+ counting(wrd1));		
+	
+
+//Task2.Написать функцию, которая принимает двузначное число
+//и возвращает его в текстовом виде. 
+
+		function numberIntextView(n) {
+			let numconverter = {
+				"один": 1,
+				"два": 2,
+				"три": 3,
+				"четыре": 4,
+				"пять": 5,
+				"шесть": 6,
+				"семь": 7,
+				"восемь": 8,
+				"девять": 9,
+				"десять": 10,
+				"одиннадцать": 11,
+				"двенадцать": 12,
+				"тринадцать": 13,
+				"четырнадцать": 14,
+				"пятнадцать": 15,
+				"шестнадцать": 16,
+				"семнадцать": 17,
+				"восемнадцать": 18,
+				"девятнадцать": 19,
+				"двадцать": 20,
+				"тридцать": 30,
+				"сорок": 40,
+				"пятьдесят": 50,
+				"шестьдесят": 60,
+				"семьдесят": 70,
+				"восемьдесят": 80,
+				"девяносто": 90,
+
+			}
+			if (n <= 20 || n == 30 || n == 40 || n == 50 || n == 60 || n == 70 || n == 80 || n == 90) {
+				return Object.keys(numconverter).find(key => numconverter[key] == n);
+			} else {
+				return Object.keys(numconverter).find(key => numconverter[key] == Math.trunc(n / 10) * 10) +
+					"  " + Object.keys(numconverter).find(key => numconverter[key] == n % 10);
+			}
+		}
+		let wrd2 = +prompt('Task2\nНаписать функцию, которая принимает двузначное число' +
+			' возвращает его в текстовом виде. ' +
+			'\nВведите двузначное число','17');
+
+		alert ('input    : '+ wrd2 +'\noutput  :  '+ numberIntextView(wrd2));	
+
+
+//Task#3 Написать функцию, которая заменяет в полученной строке
+//       большие буквы на маленькие, маленькие – на большие, а
+//       цифры – на знак нижнего подчеркивания.
+		
+		
+		function UcaseToLcase(wrd){
+			let arr=Array.from(wrd)
+			let numbrs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+			arr.forEach(function(value, i) {
+			if (numbrs.includes(value)){
+				arr[i] = "_"; 
+			} else if(value== value.toUpperCase()){
+				arr[i] = arr[i].toLowerCase();
+			}else{
+				arr[i] = arr[i].toUpperCase();
+			}
+		});
+		return arr.join('');
+		}
+		
+		let wrd3 = prompt('Task#3\nНаписать функцию, которая заменяет в полученной строке '+
+		                    'большие буквы на маленькие, маленькие – на большие,'+
+							'а цифры – на знак нижнего подчеркивания.');
+
+		alert ('input    : '+ wrd3 +'\noutput  :'+ UcaseToLcase(wrd3));
+		
+		
+//Task#4 Написать функцию, которая преобразует названия cssстилей 
+//       с дефисом в название в СamelСase стиле: font-size в fontSize,
+//       background-color в backgroundColor, text-align в textAlign.
+
+		function camelCase(wrd){
+			let arr=wrd.split('-');
+		 	arr.forEach(function(value, i){
+				if (i > 0){
+					let arr2=Array.from(arr[i]);
+					arr2[0] = arr2[0].toUpperCase();
+					arr[i]=arr2.join('');
+				}
+		 	});
+			return(arr.join(''));
+		}
+
+		let wrd4 = prompt('Task#4\nНаписать функцию, которая преобразует названия css стилей'+ 
+		                  'с дефисом в название в СamelСase стиле: font-size в fontSize, '+
+		                   'background-color в backgroundColor, text-align в textAlign.','background-color ');
+
+		alert ('input    : '+ wrd4 +'\noutput   :'+ camelCase(wrd4));			  
+	
+		
+//Task#5.Написать функцию, которая принимает словосочетание
+//       и превращает его в аббревиатуру.
+//       Например: cascading style sheets в CSS,
+//       объектноориентированное программирование в ООП. 
+
+	 	function abbreviation(wrd){
+			let arr=wrd.split(' ');
+			arr.forEach(function(value, i) {arr[i] = arr[i].slice(0, 1).toUpperCase()});
+			return arr.join('');
+		}
+
+		let wrd5 = prompt('Task#5.\nНаписать функцию, которая принимает словосочетание'+
+                        ' и превращает его в аббревиатуру.'+
+           				'Например: cascading style sheets в CSS,'+
+		                'объектно ориентированное программирование в ООП.','cascading style sheets'  );
+
+		alert ('input    :  '+ wrd5 +'\noutput  :  '+ abbreviation(wrd5)); 
+ 
+
+//Task7 Написать функцию – калькулятор. Функция принимает
+//      строку с примером, определяет, какое действие необходимо
+//      выполнить (+ - * /), переводит операнды в числа, решает
+//      пример и возвращает результат.
+
+		 let wrd7=prompt('Task7\nНаписать функцию – калькулятор. Функция принимает '+
+		                'строку с примером, определяет, какое действие необходимо '+
+                        'выполнить (+ - * /), переводит операнды в числа, решает '+
+                        'пример и возвращает результат.'+
+						'\n Примечания: Здесь лучше всегоподходит eval(), нобудем следовать заданию '+
+						'\n Введите 2 числа и один из знаков("*" ; "/" ; "+" ; "-" ) между ними ');
+
+		function yoprst(wrds,a1=0,a2=0,op=''){
+			let opr=["*" , "/" , "+" , "-"];
+			opr.forEach(function(value, i){
+				let arr=wrds.split(opr[i]);
+				 if(arr.length==2) {
+					op=i;
+					a1=arr[0];
+					a2=arr[1];
+				 } 	 		 			 
+			});
+			return  op==0 ?  a1*a2:
+					op==1 ? a1/a2:
+					op==2 ? parseFloat(a1)+parseFloat(a2):a1-a2;
+		
+		}	
+		alert ('input    :  '+ wrd7 +'\noutput  :  '+ yoprst(wrd7));  	 
+
+		
+//Task#8 Написать функцию, которая получает url и выводит подробную информацию о нем.
+//		 Например: url “https://itstep.org/ua/about”, информация
+//	     “протокол: https, домен: itstep.org, путь: /ua/about”.	
+				
+		function splitURL(ur){
+			let output={ protocol:'',domen:'',path:''};
+			output.protocol =ur.split('//')[0].slice(0,-1);
+			output.domen=ur.split('//')[1].split('/')[0];
+			output.path=ur.split('//')[1].split('/').slice(1).join('/');
+			return Object.entries(output).join("\n").replaceAll(",", " : ")
+		}	
+
+		let wrd8=prompt('Task#8\nНаписать функцию, которая получает url и выводит подробную  '+
+						'информацию о нем. Например: url \n“https://itstep.org/ua/about”,'+
+						'\nинформация “протокол: https, \nдомен: itstep.org, \nпуть: /ua/about”.','https://news.mail.ru/society/46819193/?frommail=1');	
+
+		
+		alert ('input    :  '+ wrd8 +'\n\noutput  :  \n'+ splitURL(wrd8));  	 
+	
+
+// Task#9 Написать функцию, которая принимает строку и разделитель и возвращает массив подстрок, 
+//        разбитых с помощью указанного разделителя.Например: строка “10/08/2020”, разделитель “/”,
+// 	      результат:“10”, “08”, “2020”. Выполняя задание, не используйте функцию split().
+
+		 function slashremove(wrd,separator ) {
+			let s='';
+			let arrnew=[];
+			let arr=Array.from(wrd);
+			for (let i=0; i <= arr.length; i++){
+				if (arr[i]!=separator && i!=arr.length){
+					s+=arr[i];
+				}else{
+					//arrnew.push(s);
+					arrnew.push('"'+s+'"');
+					s='';
+					continue;
+				}	
+			}
+			return arrnew;
+		}
+
+		let wrd9a=prompt('Task#9\nНаписать функцию, которая принимает строку и разделитель'+
+						' и возвращает массив подстрок,разбитых с помощью указанного '+
+						'разделителя.Например: строка “10/08/2020”, разделитель “/”,'+
+						'результат:“10”, “08”, “2020”. Выполняя задание, не используйте '+
+						'функцию split().   \n\nВведите строку','10/08/2020');
+		let wrd9b=prompt('Введите разделитель','/');		
+		alert ('input    : строка   :  '+ wrd9a + '   разделитель   :  '+ wrd9b+'\noutput  :  '+ slashremove(wrd9a,wrd9b)); 				
+		
+
+
+// Task#10.	Написать функцию вывода текста по заданному шаблону.Функция принимает первым параметром шаблон, в тексте
+//		 	которого может использоваться %, после символа % указывается индекс входного параметра. При выводе вместо
+// 			%индекс необходимо вывести значение соответствующего входного параметра.
+// 			Например: print(“Today is %1 %2.%3.%4”, “Monday”, 10,8,2020) должна вывести “Today is Monday 10.8.2020”.
+
+	
+		function rabindranat(wrd){
+			wrd=wrd.replaceAll('"','');
+			let numbrs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+			let arr=wrd.split(",")
+			let arr1=arr[0].split("%");
+			let s=arr1[0];
+			let arr2=arr1.slice(1);
+			let arr3=[];
+			let map = new Map();
+			for(let i=1; i<arr1.length;i++){
+				let x=Array.from(arr1[i]);
+				let ff ='';
+				while (numbrs.includes(x[0])){
+					ff+=x[0];
+					x=x.slice(1);
+				}
+				map.set(ff,x);
+				arr3.push(ff);
+			}
+
+			arr3.forEach(function(value, i) {s+=arr[arr3[i]]+map.get(arr3[i])});
+			return s;
+		}
+		let wrd10=prompt('Task#10\nНаписать функцию вывода текста по заданному шаблону. '+
+							'Функция принимает первым параметром шаблон, в тексте '+
+							'которого может использоваться %, после символа % указывается '+
+							' индекс входного параметра. При выводе вместо % индекс '+
+							' необходимо вывести значение соответствующего входного '+
+							'параметра.','"Today is %1 %2.%3.%4","Monday",10,8,2020');
+
+		alert ('input    :  '+ wrd10 +'\noutput  :  '+ rabindranat(wrd10)); 
+			
+//Task#6.Написать функцию, которая принимает любое количество строк, 
+//       объединяет их в одну длинную строку и возвращает ее. 
+
+		alert('Task#6.\nНаписать функцию, которая принимает любое количество строк,'+ 
+		      ' объединяет их в одну длинную строку и возвращает ее.')
+		document.getElementsByTagName("body")[0].innerHTML += '<textarea id="input" placeholder="Input"   rows="4" cols="50" ></textarea><br><br>';
+		document.getElementsByTagName("body")[0].innerHTML += '<button type="button" onclick="tt()" >convert</button>';
+		function tt(){
+			let wrrd = document.getElementById("input").value;	
+			alert(monoline(wrrd));
+			document.body.innerHTML = "";
+		}
+         let monoline=(wrd)=> wrd.split('\n').join(' '); 
+		
+			
+	</script>
+</body>
+
+</html>

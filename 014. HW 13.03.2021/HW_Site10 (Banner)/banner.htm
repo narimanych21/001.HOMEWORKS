@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
+        <style>
+			
+            * { box-sizing: border-box; }
+            body { margin: 0; }
+			
+			
+			
+			
+			
+            #banner {
+                position: relative;
+                border: 1px solid silver;
+                width: 728px; 
+                height: 90px;
+                background:#e3f2fd ;
+                overflow: hidden;
+				margin:0 auto;
+				margin-top:60px;
+            }
+			
+			#wheel{
+				position: absolute;
+				background-color:red;
+				height:90px;
+				width:90px;
+				border-radius:45px;
+				background: url('img/wheel.png') center/cover no-repeat;
+				animation-name:wll;
+				animation-duration: 0.8s;
+                animation-timing-function: linear;
+				animation-fill-mode: forwards;
+                z-index: 2 ;
+			}
+			#wrds{
+				position: relative;
+				background-color: #bbdefb;
+				font:bold 1.2em 'PT Sans', sans-serif;
+				color:#020275;
+				height:90px;
+				width:100%;
+				animation-name:wwtt;
+				animation-duration: 0.8s;
+				animation-fill-mode: forwards;
+				animation-timing-function: linear;
+				}
+			#w1	{
+				position: absolute;
+				<--background-color:silver;-->
+				height:30px;
+				width:250px;
+				top:0;
+				left:-300px;
+				<--left:90px;-->
+				z-index: 5 ;
+				animation-name:w1;
+				animation-delay: 1s;
+				animation-duration: 0.8s;
+				animation-fill-mode: forwards;
+				text-align:center;
+				
+			}
+			#w2	{
+				position: absolute;
+				<--background-color:green;-->
+				height:30px;
+				width:250px;
+				top:30px;
+				left:-300px;
+				
+				z-index: 5 ;
+				animation-name:w2;
+				animation-delay:2s;
+				animation-duration:0.8s;
+				animation-fill-mode: forwards;
+				
+				
+			}	
+			
+			
+			
+			#w3	{
+				position: absolute;
+				<--background-color:yellow;-->
+				height:30px;
+				width:250px;
+				top:60px;
+				left:-300px;
+				z-index: 5 ;
+				animation-name:w3;
+				animation-delay:3s;
+				animation-duration:0.8s;
+				animation-fill-mode: forwards;
+			}		
+			
+			#misha{
+				position: absolute;
+				height:100px;
+				width:100px;
+				top:-10px;
+				left:0;
+				background: url('img/misha.png') center/cover no-repeat;
+				opacity:0;
+				animation-name:misha;
+				animation-delay:4s;
+				animation-duration:2s;
+				animation-fill-mode: forwards;
+				
+				
+				
+			}
+			
+				
+			@keyframes wwtt {
+                0%    {right:638px;}
+                100%  {right:0px;}misha
+            }
+			 @keyframes wll {
+                0%    {transform: rotate(0deg)   ;left: 0%;  }
+                100%  {transform: rotate(360deg) ;left: 88%;}
+            }
+			
+			@keyframes w1 {
+                0%    {left:-300px;}
+                100%  {left:150px}
+			}
+			@keyframes w2 {
+                0%    {left:-300px;}
+                100%  {left:275px;}
+			}
+		
+			@keyframes w3 {
+                0%    {left:-300px;}
+                100%  {left:340px;}
+			}
+		
+			@keyframes misha {
+                0%   {opacity: 0;}
+                100%  {opacity: 100%;}
+            }
+
+
+			
+	
+        </style>
+    </head>
+    <body>
+        <div id="banner">
+			<div id="wheel"></div>
+			<div id="wrds">
+				<div id ="w1">Надежность</div>
+				<div id ="w2">и спокойствие</div>
+				<div id ="w3">в любой ситуации</div>
+			</div>
+			<div id="misha"></div>
+		   
+        </div>
+    </body>
+</html>

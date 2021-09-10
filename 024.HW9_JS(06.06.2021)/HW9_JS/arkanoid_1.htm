@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Arcanoid</title>
+</head>
+
+<body>
+    <script>
+        let score = 0;
+        let life = 3;
+        let ballcolor = "red";
+        let ballspeed = 20;
+        let bricksrows = 4;
+        let ballmoving;
+        let timedata = false;
+        let field = {
+            width: 900,
+            height: 100,
+            create() {
+                document.getElementsByTagName("body")[0].innerHTML += '<div id="field"></div>';
+                this.elem = document.getElementById("field");
+                field.show();
+            },
+            show() {
+                this.elem.style.display = "grid";
+                this.elem.style.gridTemplateColumns = "auto auto";
+                this.elem.style.margin = "10px auto";
+                this.elem.style.background = "#95cf97";
+                this.elem.style.border = "2px solid green";
+                this.elem.style.width = this.width + "px";
+                this.elem.style.height = this.height + "px";
+                this.elem.style['font-size'] = "20px";
+                this.elem.style.color = "#0d5223";
+                this.elem.style['text-align'] = "left";
+            }
+
+        }
+        field.create();
+        //--timer---
+        let hrs = 0;
+        let minute = 0;
+        let second = 0;
+        let pz = 1;
+
+        let timer;
+        let timeDisplay = {
+            hours: fixedValue(hrs),
+            minutes: fixedValue(minute),
+            seconds: fixedValue(second)
+        }
+        let tmr = {
+            width: 300,
+            height: 40,
+            create() {
+                document.getElementById("field").innerHTML += '<div id="tmr1"></div>';
+                this.elem = document.getElementById("tmr1");
+                this.show();
+            },
+            show() {
+                this.elem.style.padding = "5px";
+                this.elem.style['align-self'] = "center";
+                this.elem.style['justify-self'] = "center"
+                this.elem.style['font-size'] = "20px";
+                this.elem.style.color = "#0d5223";
+            }
+        }
+        tmr.create();
+        tmr.elem.innerText = 'Elapsed time ' + Object.values(timeDisplay).join(":");
+        function fixedValue(t) { return t < 10 ? "0" + t : t; }
+
+        function timeOn() {
+            timeOff();
+            timer = setInterval(() => { timing(); }, 1000);
+            ballmoving = setInterval(ball.move, ballspeed);
+
+        }
+        function timeOff() {
+            clearInterval(timer);
+            clearInterval(ballmoving);
+        }
+
+        function timing() {
+            if ((second += 1) == 60) {
+                second = 0;
+                minute++;
+            }
+            if (minute == 60) {
+                minute = 0;
+                hrs++;
+            }
+
+            timeDisplay = { hours: fixedValue(hrs), minutes: fixedValue(minute), seconds: fixedValue(second) }
+            document.getElementById("tmr1").innerText = 'Elapsed time ' + Object.values(timeDisplay).join(":");
+        }
+
+        function fixedValue(t) { return t < 10 ? "0" + t : t; }
+        //-- keydown for left right and spacebar 
+        document.onkeydown = function (e) {
+            if (e.keyCode == 32) {
+                document.getElementById("radio#1").disabled = true;
+                document.getElementById("radio#2").disabled = true;
+                document.getElementById("radio#3").disabled = true;
+                if (pz % 2) {
+                    timeOn();
+                } else {
+                    timeOff();
+                }
+                pz++;
+            }
+            if (pz % 2 == 0) {
+                if (e.keyCode == 39) bar.x += bar.dx;
+                if (e.keyCode == 37) bar.x -= bar.dx;
+                bar.move(bar.x)
+            }
+        }
+        //-end timer-
+        //-score-
+        let scores = {
+            width: 300,
+            height: 40,
+            create() {
+                document.getElementById("field").innerHTML += '<div id="scrs"></div>';
+                this.elem = document.getElementById("scrs");
+                this.show();
+            },
+            show() {
+                this.elem.style.padding = "5px";
+                this.elem.style['align-self'] = "center";
+                this.elem.style['justify-self'] = "center"
+                this.elem.style['font-size'] = "20px";
+                this.elem.style.color = "#0d5223";
+                this.elem.style['text-align'] = "center";
+                this.elem.style.width = this.width + "px";
+                this.elem.style.height = this.height + "px";
+            }
+        }
+        scores.create();
+        scores.elem.innerText = 'Score  : ' + score;
+        //--end  score--
+        //--level--
+        let y = 1; //  default index for levelsArray 
+        let barwidth = 150;
+        let levelsArray = ['',
+            { bricksrow: 2, ballspeeds: 20, barwidth: 150 },
+            { bricksrow: 3, ballspeeds: 12, barwidth: 150 },
+            { bricksrow: 4, ballspeeds: 10, barwidth: 80 }
+        ]
+        function myFunction(event) {
+            let elem = document.getElementsByName('lvl');
+            for (i = 0; i < elem.length; i++) {
+                if (elem[i].checked) {
+                    y = elem[i].value;
+                    break;
+                }
+            }
+
+            //This is not working in "bricks" block :     bricksrows = levelsArray[y].bricksrow;
+            ballspeed = levelsArray[y].ballspeeds;
+            //same for bar width           
+            barwidth = levelsArray[y].barwidth;
+        }
+
+        let lvls = {
+            width: 300,
+            height: 40,
+            create() {
+                document.getElementById("field").innerHTML += '<div id="lvls"></div>';
+                this.elem = document.getElementById("lvls");
+                this.show();
+            },
+            show() {
+                this.elem.style.padding = "5px";
+                this.elem.style['align-self'] = "center";
+                this.elem.style['justify-self'] = "center"
+                this.elem.style['font-size'] = "20px";
+                this.elem.style.color = "#0d5223";
+                this.elem.style['text-align'] = "center";
+                this.elem.style.width = this.width + "px";
+                this.elem.style.height = this.height + "px";
+            }
+        }
+        lvls.create();
+        let level = {
+            create(n) {
+                let child = document.createElement('input');
+                child.setAttribute("id", "radio#" + n)
+                child.setAttribute("value", n)
+                child.name = 'lvl';
+                child.type = 'radio';
+                child.setAttribute("onclick", "myFunction(event)");
+                this.elem = child;
+
+                level.show();
+                document.getElementById("lvls").append(child);
+            },
+            show() {
+
+                this.elem.style.display = "inline-block";
+                this.elem.style['vertical-align'] = "middle";
+                this.elem.style.margin = "10px";
+                this.elem.style.height = "20px";
+                this.elem.style.width = "20px";
+                this.elem.style.color = ballcolor;
+
+            }
+        }
+        document.getElementById("lvls").innerText += "Level :";
+        for (let i = 1; i <= 3; i++)  level.create(i);
+        //--end level--
+        //---life---
+        let lifes = {
+            width: 300,
+            height: 40,
+            create() {
+                document.getElementById("field").innerHTML += '<div id="lfs"></div>';
+                this.elem = document.getElementById("lfs");
+                this.show();
+            },
+            show() {
+                this.elem.style.padding = "5px";
+                this.elem.style['align-self'] = "center";
+                this.elem.style['justify-self'] = "center"
+                this.elem.style['font-size'] = "20px";
+                this.elem.style.color = "#0d5223";
+                this.elem.style['text-align'] = "center";
+                this.elem.style.width = this.width + "px";
+                this.elem.style.height = this.height + "px";
+            }
+        }
+        lifes.create();
+        let lifeball = {
+            width: 20,
+            create(n) {
+                let child = document.createElement('div');
+                child.setAttribute("id", "lifeball#" + n)
+                this.elem = child;
+                lifeball.show();
+                document.getElementById("lfs").append(child);
+            },
+            show() {
+                this.elem.style.display = "inline-block";
+                this.elem.style['vertical-align'] = "middle";
+                this.elem.style.margin = "10px";
+                this.elem.style.borderRadius = "50%";
+                this.elem.style.background = ballcolor;
+                this.elem.style.width = this.width + "px";
+                this.elem.style.height = this.width + "px";
+            }
+        }
+        document.getElementById("lfs").innerText += "Remaining lifes   :";
+        for (let i = 1; i <= life; i++) {
+            lifeball.create(i);
+        }
+        //--end life---
+        //-game field--
+        let game = {
+            width: 900,
+            height: 600,
+            create() {
+                document.getElementsByTagName("body")[0].innerHTML += '<div id="game"></div>';
+                this.elem = document.getElementById("game");
+                game.show();
+            },
+            show() {
+                this.elem.style.position = "relative";
+                this.elem.style.margin = "5px auto";
+                this.elem.style.background = "#95cf97";
+                this.elem.style.border = "3px solid green";
+                this.elem.style.width = this.width + "px";
+                this.elem.style.height = this.height + "px";
+                this.elem.style['font-size'] = "70px";
+                this.elem.style.color = "green";
+                this.elem.style['text-align'] = "center";
+
+            }
+        }
+        game.create();
+        document.getElementById("radio#1").checked = true;
+
+        //--bar--        
+        let bar = {
+            x: 0,
+            y: 0,
+            dx: 30,
+            //No reaction
+            width: levelsArray[y].barwidth,
+            height: 8,
+            color: "blue",
+            create() {
+                game.elem.innerHTML += '<div id="bar"></div>';
+                // this.width = barwidth;
+                this.y = game.height - this.y - this.height;
+                this.x = (game.width - this.width) / 2;
+                bar.show();
+            },
+            show() {
+                let elem = document.getElementById("bar");
+                elem.style.position = "absolute";
+                elem.style.width = barwidth + "px";
+                elem.style.height = this.height + "px";
+                elem.style.backgroundColor = this.color;
+                elem.style.left = this.x + "px";
+                elem.style.top = this.y + "px";
+            },
+            move(x) {
+                if (bar.x < 0) bar.x = 0;
+                if (x > game.width - barwidth) bar.x = game.width - barwidth;
+                bar.show();
+            }
+        }
+        bar.create();
+        //--bricks--
+        let bricks = {
+            m: bricksrows,//not working
+            n: 12,
+            spacing: 5,
+            color: "orange",
+            arr: [],
+            create() {
+                this.width = (game.width - (bricks.n + 1) * bricks.spacing) / bricks.n;
+                this.height = this.width / 5;
+                for (let i = 0; i < this.m; i++) {
+                    for (let j = 0; j < this.n; j++) {
+                        let brick = new function () {
+                            this.x = j * bricks.width + (j + 1) * bricks.spacing;
+                            this.y = 50 + i * bricks.height + (i + 1) * bricks.spacing;
+                            this.width = bricks.width;
+                            this.height = bricks.height;
+                            this.status = true;
+                        }
+                        this.arr.push(brick);
+                        game.elem.innerHTML += '<div id="brick' + (i * this.n + j) + '"></div>';
+                    }
+                }
+                bricks.show();
+            },
+            show() {
+                for (let i = 0; i < this.m * this.n; i++) {
+                    let brick = this.arr[i];
+                    let elem = document.getElementById("brick" + i);
+                    if (brick.status) {
+                        elem.style.position = "absolute";
+                        elem.style.width = this.width + "px";
+                        elem.style.height = this.height + "px";
+                        elem.style.backgroundColor = this.color;
+                        elem.style.left = brick.x + "px";
+                        elem.style.top = brick.y + "px";
+                    } else elem.style.display = "none";
+                }
+            },
+            check() {
+                for (let i = 0; i < this.m * this.n; i++) {
+                    let brick = this.arr[i];
+                    if (brick.status && collision(brick)) {
+                        this.arr[i].status = false;
+                        //ball.dx *= 1.05;
+                        ball.dy *= -1;
+                        score += 100;
+                        document.getElementById("scrs").innerText = 'Score  : ' + score;
+                        break;
+                    }
+                }
+                bricks.show();
+                if (this.arr.filter(function (item) { return !item.status }).length == this.m * this.n) {
+                    document.getElementById("game").innerText += "Congratulations you win!";
+                    timeOff();
+                }
+            }
+        }
+        bricks.create();
+
+        //==ball--
+        let ball = {
+            x: 0.1,
+            y: 0.1,
+            dx: 5,
+            dy: -5,
+            radius: 10,
+            color: ballcolor,
+            create() {
+                game.elem.innerHTML += '<div id="ball"></div>';
+                this.elem = document.getElementById("ball");
+                this.y = game.height - 2 * this.radius - bar.height;
+                this.x = bar.x + bar.width / 2 - this.radius;
+                this.up = 1;
+                this.lefttoright = 1;
+                ball.show();
+            },
+            show() {
+                this.elem.style.position = "absolute";
+                this.elem.style.width = 2 * this.radius + "px";
+                this.elem.style.height = 2 * this.radius + "px";
+                this.elem.style.borderRadius = "50%";
+                this.elem.style.backgroundColor = this.color;
+                this.elem.style.left = this.x + "px";
+                this.elem.style.top = this.y + "px";
+            },
+            move() {
+                if (ball.x <= 0 || ball.x >= game.width - 2 * ball.radius) ball.dx *= -1;
+                if (ball.y <= 0) ball.dy *= -1;
+                if (collision(bar)) ball.dy *= -1;
+                if (ball.y >= game.height - 2 * ball.radius) game.over();
+                bricks.check();
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+                ball.show();
+
+                if (ball.y >= game.height - 2 * ball.radius) {
+                    if (life > 0) {
+                        document.getElementById("lifeball#" + life).style.display = "none";
+                        life--;
+                        alert('One life gone. \r\nPress space bar to continue');
+                        timeOff();
+                        pz++;
+                        bar.x = (game.width - bar.width) / 2;
+                        ball.x = bar.x + bar.width / 2 - ball.radius;
+                        ball.y = game.height - 2 * ball.radius - bar.height;
+                        bar.show();
+                        ball.show();
+                    } else {
+                        document.getElementById("game").innerText += "GAME OVER"
+                    }
+                }
+            }
+        }
+        ball.create();
+        //--end ball--
+        function collision(obj) {
+            return (ball.x > obj.x - 2 * ball.radius &&
+                ball.x < obj.x + obj.width &&
+                ball.y > obj.y - 2 * ball.radius &&
+                ball.y < obj.y + obj.height)
+        }
+        function collisionbar() {
+            return (ball.x > bar.x - 2 * ball.radius &&
+                ball.x < bar.x + bar.width &&
+                ball.y > bar.y - 2 * ball.radius);
+
+        }
+        game.elem.onmousemove = function (e) {
+            if (pz % 2 == 0) {
+                bar.x = e.pageX - game.elem.offsetLeft - bar.width / 2;
+                bar.move(bar.x);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW8_2</title>
+	    <style>
+		    #gen{width:350px;display: flex; align-items:center;justify-content:space-around;}
+			div{width:60px; display:inline-block ;}
+			input{width:50px;text-align:center;}
+			select{width:60px;}
+			#soc{display:block; margin-bottom:10px;}
+		</style>
+    </head>
+    <body onload="loadData()">
+		<h4>действия над дробями</h4>
+		<div id ="gen">		
+			<div id ="frac1">
+				<input type="number" id="num1" disabled="disabled" >
+				<hr>
+				<input type="number" id="denom1"disabled="disabled"  >
+			</div>
+			<select id="sign">
+					<option value="mult">*</option>
+					<option value="division">/</option>
+					<option value="addition">+</option>
+					<option value="subtraction">-</option>
+			</select>
+			<div >
+				<input type="number" id="num2" disabled="disabled" >
+				<hr>
+				<input type="number" id="denom2" disabled="disabled" >
+			</div>
+			<button onclick="result1()" id="equally">=</button>
+			<div >
+				<input type="number" id="num4" disabled="disabled" >
+				<hr>
+				<input type="number" id="denom4" disabled="disabled" >
+			</div>	
+		</div>
+		
+		<h4>Сокращение дроби</h4>
+			<div id ="soc">
+				<input type="number" id="num3">
+				<hr>
+				<input type="number" id="denom3">
+			</div>
+		<button onclick="reduct()">Сократить</button>
+        <script>
+			const num1 = document.getElementById("num1");
+			const num2 = document.getElementById("num2");
+			const num3 = document.getElementById("num3");
+			const num4 = document.getElementById("num4");
+			
+			const denom1 = document.getElementById("denom1");
+			const denom2 = document.getElementById("denom2");
+			const denom3 = document.getElementById("denom3");
+			const denom4 = document.getElementById("denom4");
+			const res = document.getElementById("res");
+			let kod="";
+			let fraction1 = {numerator:4,denominator:7};
+			let fraction2 = {numerator:1,denominator:2};
+			let fraction3 = {numerator:9,denominator:24};
+			
+			function loadData(){
+				num1.value=	fraction1.numerator;
+				num2.value=	fraction2.numerator;
+				num3.value=	fraction3.numerator;
+				denom1.value=fraction1.denominator;
+				denom2.value=fraction2.denominator;
+				denom3.value=fraction3.denominator;
+			}
+			
+			function reduct(){
+					let x= +num3.value;
+					let y= +denom3.value
+					num3.value=FracReduction (x,y)[0];
+					denom3.value=FracReduction (x,y)[1];
+			}
+			
+			function result1(){
+				//умножение
+				if (sign.selectedIndex == 0){
+					num4.value = mult(fraction1,fraction2)[0];
+					denom4.value = mult(fraction1,fraction2)[1];
+				}
+				//деление
+				if (sign.selectedIndex == 1){
+					num4.value = divide(fraction1,fraction2)[0];
+					denom4.value = divide(fraction1,fraction2)[1];
+				}
+				//сложение
+				if (sign.selectedIndex == 2){
+					num4.value = summ(fraction1,fraction2)[0];
+					denom4.value = summ(fraction1,fraction2)[1];
+				}
+				//вычитание
+				if (sign.selectedIndex == 3){
+					num4.value = subtraction(fraction1,fraction2)[0];
+					denom4.value = subtraction(fraction1,fraction2)[1];
+				}
+				
+			}
+			
+			//умножение
+			 function mult(a,b){
+				let buff={numerator:a.numerator*b.numerator,denominator:a.denominator*b.denominator};
+				return FracReduction (buff.numerator,buff.denominator)
+			}
+			//деление
+			function divide(a,b){
+				let x={numerator:b.denominator,denominator:b.numerator};
+				let buff={numerator:a.numerator*x.numerator,denominator:a.denominator*x.denominator};
+				return FracReduction (buff.numerator,buff.denominator)
+			}
+			//сложение
+			function summ(a,b){
+				let x1 = a.numerator*b.denominator +b.numerator*a.denominator;
+				let x2 = a.denominator*b.denominator;
+				return FracReduction (x1 ,x2);
+			
+			}
+			//вычитание
+			function subtraction(a,b){
+				let x1 = a.numerator*b.denominator - b.numerator*a.denominator;
+				let x2 = a.denominator*b.denominator;
+				return FracReduction (x1 ,x2);			
+			} 
+			
+			
+			
+			function evklid(a,b){
+				while (a!=0 && b!=0){
+						if(a > b){
+							a =a % b;
+						}else{
+							b = b % a;
+						}
+				}
+				return (a+b);
+			}
+		
+			function  FracReduction (a,b){
+						return[a/evklid(a,b),b/evklid(a,b)];
+							
+			}	
+        </script>
+    </body>
+</html>

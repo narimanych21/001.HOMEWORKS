@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Homework1_1</title>
+    </head>
+    <body>
+		
+        <script>
+		
+		//Task #1 
+			let Name = prompt ("Task #1     Введите ваше имя.");
+			alert(`Привет ${Name} !`);
+
+		//Task #2
+			const currentYear= 2021
+			let birthdayYear = +prompt ("Task #2  Введите год вашего рождения.");
+			let age=currentYear-birthdayYear ;
+			alert(`Вам ${age} года(лет)`);
+			
+		//Task #3	
+			let squareSide = +prompt ("Task #3  Введите длину стороны квадрата.");
+			let squarePerim=4*squareSide;
+			alert(`Периметр квадрата равен ${squarePerim} .`);
+			
+		//Task #4	
+		
+			let radius = +prompt ("Task #4  Введите радиус круга.");
+			let circlеArea=Math.round(Math.PI*radius**2*100)/100;
+			alert(`Площадь круга равна  ${circlеArea}`);	
+			
+		//Task #5	
+			let distance = +prompt ("Task #5  Введите расстояние в км.");
+			let time = +prompt ("Task #5  Введите время(в часах).");
+			let speed= Math.ceil(distance/time);
+			alert(`Вы должны двигаться со скоростью не менее ${speed} км/ч , чтобы успеть вовремя.`);		
+		
+		//Task #6
+			const carrencyRate= 0.8406
+			let dollar = +prompt ("Task #6  Введите количество  долларов.");
+			let euro= Math.round(dollar*carrencyRate*100)/100;
+			alert(`${dollar} долларов по курсу 1USD=${carrencyRate} EUR делает ${euro} евро ` );
+			
+		//Task #7
+			const fileSize= 820
+			let mStickSise = +prompt ("Task #7  Введите объем флешки в Гб.");
+			let fileQnty= Math.trunc(mStickSise*1000/fileSize);
+			alert(`${fileQnty} файл(файлов) размером ${fileSize}Mb  поместится на флешку ` );	
+		
+		//Task #8	
+			let walletCash = +prompt ("Task #8  Введите сумму денег в кошельке");
+			let chocPrice = +prompt ("Task #8  Введите цену шоколадки.");
+			let choc= Math.trunc(walletCash/chocPrice);
+			let changeCash=Math.round((walletCash-chocPrice*choc)*100)/100;
+			alert(`Можно купить ${choc} шоколад(ок/ки/ку).Останется сдачи ${changeCash} `);
+	
+		//Task #9
+			let nmbr = +prompt ("Task #9  Введите 3-х значное число.");
+			let digit1=Math.trunc(nmbr/100);
+			let digit2=Math.trunc(Math.trunc(nmbr-digit1*100)/10);
+			let digit3=(nmbr-digit1*100) % 10;
+			let revNumber=digit3*100+digit2*10+digit1;
+			alert(`${nmbr} наоборот будет ${revNumber} ` );	
+        </script>
+    </body>
+</html>

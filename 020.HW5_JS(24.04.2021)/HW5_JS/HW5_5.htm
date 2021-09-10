@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_4</title>
+    </head>
+    <body>
+        <script>
+			let kod ="";
+			let counter = 1;
+			let count0=0;
+			let countPositive=0;
+			let odd=0;
+			let x;
+			let n;
+			while (counter <= 10){
+				do {
+					n = prompt(`Введите ${counter}-е число`);
+				} 	while ((x = +n) != parseFloat(n));
+			         counter ++ ;
+				if (x % 2){odd++};
+				if (x==0){
+					count0++;
+				}else if(x>0){
+				countPositive++;
+				}				
+			}		
+			alert ("Четных чисел : " + (10-odd)+ "\n"+
+				   "Нечетных чисел : " + odd + "\n"+
+				   "Равных 0 : " + count0 + "\n"+
+				   "Положительных : " + countPositive + "\n"+
+				   "Отрицательных : " + (10-(countPositive+count0)) + "\n"
+			);		
+		</script>
+    </body>
+</html>

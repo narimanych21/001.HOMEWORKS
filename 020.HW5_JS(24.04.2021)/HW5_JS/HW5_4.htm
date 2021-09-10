@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_4</title>
+    </head>
+    <body>
+        <script>
+			let kod =0;
+			do {let x= +prompt("Подсчет цифр в числе.\nВведите натуральное число");
+				} 	while (isNaN(x) || x<=0 || x!=parseInt(x));			
+			while (x >=1){
+				kod++;
+				x=x/10	;	
+			}
+			alert("Количество цифр равно " + kod);	
+		</script>
+    </body>
+</html>

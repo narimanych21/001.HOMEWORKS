@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW1_2</title>
+        <style>
+		
+			div {padding: 100px;}
+			.inp1{width: 100px;	border: 2px solid #000;color:orange;text-align:center;}
+			.inp2{width: 60px;	 margin: 0 10px 0 0 ;border: 2px solid #880015;color:orange;text-align:center;}
+			button{width:40px;border-radius: 5px;}
+			#btn1{background-color:#FFF;color:#000;}
+			#btn2{background-color:#FFF;color:#880015;border-color:#880015;}
+			ul {margin-left: 0;padding-left: 0; }
+			li {list-style-type: none;color:orange;}
+			
+		</style>
+    </head>
+    <body>
+		<div>
+			<input id="NM1" class ="inp1" type="text"> 
+			<button id="btn1"> <=> </button>
+			<input id="NM2" class ="inp1"type="text">
+		</div>
+			
+		<div>
+			<input id="NBR1" class ="inp2" type="text"> 
+			<input id="NBR2" class ="inp2"type="text">
+			<input id="NBR3" class ="inp2"type="text">
+			<button id="btn2"> Ok </button>
+			<ul>
+				<li id="SM"></li>
+				<li id="AV"></li>
+				<li id="PR"></li>	
+			</ul>		
+		</div>
+   
+
+		<script>
+		//task1
+            const NM1 = document.getElementById("NM1");
+            const NM2 = document.getElementById("NM2");
+            const btn = document.getElementById("btn");
+			NM1.value="Kenan";
+			NM2.value="Vahid";
+
+            btn1.onclick = function() {
+				let temp= NM1.value;
+                NM1.value=NM2.value;
+				NM2.value=temp;
+            }
+			
+		//task2
+			 const NBR1 = document.getElementById("NBR1");
+			 const NBR2 = document.getElementById("NBR2");
+			 const NBR3 = document.getElementById("NBR3");
+			 const SM = document.getElementById("SM");
+			 const AV = document.getElementById("AV");
+			 const PR= document.getElementById("PR");
+				 
+			 btn2.onclick = function() {
+				let X1= +NBR1.value;
+				let X2= +NBR2.value;
+				let X3= +NBR3.value;
+                let totalSum=X1+X2+X3;
+				let average =Math.round(totalSum/3*100)/100;
+				let product=X1*X2*X3;
+				SM.innerHTML ="Cəm " + totalSum;
+				AV.innerHTML ="Orta " + average;
+				PR.innerHTML ="Hasili " + product;	
+            }			 
+        </script>
+    </body>
+</html>

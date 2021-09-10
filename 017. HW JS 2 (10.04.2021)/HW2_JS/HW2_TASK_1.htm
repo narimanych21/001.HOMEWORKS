@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Age</title>
+    </head>
+    <body>
+        <script>
+			let age = +prompt("Введите ваш возраст:");
+			alert(  (age <=0) ? "Вашвозраст должен быть больше 0" :
+					(age > 0 && age < 12) ? "Вы ребенок" :
+					(age >=12 && age < 18) ? "Вы подросток":
+					(age >=18 && age < 60) ? "Вы взрослый человек!":"Вы пенсионер.");
+        </script>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Task_7 Discount</title>
+    </head>
+    <body>
+        <script>
+			let disc;
+			let price2;
+			let price1 = +prompt("Введите сумму покупки ");
+				if (price1<=0 || isNaN(price1)) {alert ("Сумма введена неправильно.");
+				}else {(price1 > 0 && price1 < 200) ? disc=0 :
+					(price1 >= 200 && price1 < 300) ? disc=3 :
+			        (price1 >= 300 && price1 < 500) ? disc=5 :disc=7;
+		    	    price2=price1*(1-disc/100).toFixed(2);
+					alert(`Ваша скидка составляет ${disc}%  сумма к оплате : ${price2}`);	
+				}
+        </script>
+    </body>
+</html>

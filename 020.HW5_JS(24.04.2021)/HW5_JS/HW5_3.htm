@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_3</title>
+    </head>
+    <body>
+        <script>
+			let kod = "";
+			let x;
+			do {x= +prompt("Введите натуральное число");
+				} 	while (isNaN(x) || x<=0 || x!=parseInt(x));		
+			
+				for (let i = 2; i < x; i++) {
+					 kod += (x % i) ? "": " ; " + i ;
+				}				
+				alert((kod !="") ? 	"Делители числа " + x +  " не считая еденицы и самого числа  " + kod.slice(2,kod.length) : 
+									"Число " + x + " является простым")	;	
+
+        </script>
+    </body>
+</html>

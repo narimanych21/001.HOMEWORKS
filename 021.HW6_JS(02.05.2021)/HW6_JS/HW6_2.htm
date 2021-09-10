@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            table { border-collapse: collapse; margin: 50px auto ; cursor: pointer;}
+            td { width: 80px; height: 80px; border: 2px solid #111; text-align: center; font: bold 2em Arial; }
+        </style>
+    </head>
+    <body>
+        <table id="tbl"  ></table>
+        <script>			
+			const tbl = document.getElementById("tbl");
+			let kod = "";
+			let a = [];
+			let a1 = [];
+			let hole = [];
+			let rw;
+			let sm;	
+			while (true){ 
+				// Generating random integers...
+				a1=[];
+				a = [];
+				for (let i = 0; i < 16; i++) a1.push(Math.random().toFixed(4)); 
+				let a2 = [].concat(a1);
+				a2=a2.sort();
+				for(let i = 0; i < 16; i++){          
+					for(let j = 0; j < 16; j++){
+					 if (a1[i] == a2[j]) a.push(j);
+					}
+				}
+				// Check for solution
+				sm=0;
+				for(let k = 0; k < 16; k++){
+						for(let q = k+1; q < 17; q++){
+							if 	(a[k]>a[q]) {
+								sm++;
+							}else{
+								rw=((k==0)? 1 : Math.ceil(k/4));
+							}
+					}
+					
+				}					
+					if ((sm+rw)%2==0)break ; // if (sm+rw)%2=0 ->  solution condition
+			}
+			a[a.indexOf(0)]="";
+			
+			for(let i = 1; i <= 4; i++) {
+                kod += "<tr>";
+                for(let j = 1; j <= 4; j++) {
+                    let x = (i-1)*4+j-1; //rand(0, a.length-1);
+                    kod += '<td id="td' + i + j + '" onclick="move(' + i + ', ' + j + ')">' + a[x] + '</td>';
+                    if (a[x] == "") hole = [i, j]; 
+                }
+                kod += "</tr>";
+            }
+	
+			tbl.innerHTML += kod;
+            
+            function move(i, j) {
+					check();
+                if (i == hole[0] && Math.abs(j - hole[1]) == 1 ||
+                    j == hole[1] && Math.abs(i - hole[0]) == 1) {
+                    document.getElementById("td"+hole[0]+hole[1]).innerHTML = document.getElementById("td"+i+j).innerHTML;
+                    document.getElementById("td"+i+j).innerHTML = "";					
+                    hole = [i, j];
+                }
+            }
+			function check(){
+				let counter=0;
+				for(let i = 1; i <= 4; i++){
+					for(let j = 1; j <= 4; j++) {
+						if (document.getElementById("td"+i+j).innerHTML==(i-1)*4+j) ++counter;
+						if (counter>14) {
+							choice();
+							break;
+						}
+												
+					}
+				}
+			}
+			function choice(){
+				let newwrd= '\nЕсли хотите сыграть еще раз , нажмите "ОК"\nДля выхода нажмите "Отмена"';
+					if (confirm(newwrd)){
+						location.reload();
+					}else {
+						window.close() ; 
+					}	
+			}
+	
+        </script>
+    </body>
+</html>

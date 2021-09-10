@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            table { border-collapse: collapse; margin: 140px auto ;font: bold 2em Arial;cursor: pointer;}
+            td { width: 80px; height: 80px; border: 1px solid #333; text-align: center;  }
+        </style>
+    </head>
+    <body>
+        <table id="tbl"><caption id="t">Осталось  10 сек</caption></table>
+        <script>
+            const tbl = document.getElementById("tbl");
+			let counter=1;
+            let sec = 9;
+            let kod = "";
+            let arr = [];
+			let timer1;
+            for(let i = 1; i <= 16; i++){
+                arr.push(i);
+            }
+  
+            for(let i = 1; i <= 4; i++){
+                kod += "<tr>";
+                for(let j = 1; j <= 4; j++){
+                    let x = rand(0, arr.length - 1);
+					 kod += '<td id="td' + i + j + '" onclick="block(' + i + ', ' + j + ')">' + arr[x] + '</td>';
+                    arr.splice(x, 1);
+                }
+                kod += "</tr>";
+            }
+            tbl.innerHTML += kod;
+
+
+            function rand(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) ) + min;
+            }
+			
+			function block(i,j){
+				if (counter==1) start();
+				if (counter== document.getElementById("td"+i+j).innerHTML) {
+					document.getElementById("td"+i+j).style.backgroundColor= "#AAA";
+					counter++;
+				}	
+			}
+			
+			function choice(wrd=""){
+				let newwrd= wrd + '\nЕсли хотите сыграть еще раз , нажмите "ОК"\nДля выхода нажмите "Отмена"';
+					if (confirm(newwrd)){
+						location.reload();
+					}else {
+						window.close() ; 
+					}	
+			}
+				function start(){
+				timer1=	setInterval (function(){
+					document.getElementById("t").innerHTML= `Осталось  ${sec} сек`; 
+					sec--;
+					if(sec<=-1) {
+						clearInterval(timer1);
+						choice('Время вышло, вы проиграли!');
+					}else{
+						if(counter==17) choice('Вы выиграли!'); // bug here
+					}
+				},1000);			
+			}		
+        </script>
+    </body>
+</html>

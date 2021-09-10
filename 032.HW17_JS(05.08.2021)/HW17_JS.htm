@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+	<script>
+
+		// Создать объект, описывающий прямоугольник (хранит координаты левой верхней и правой нижней точек  и угол поворота)
+		let Dsin = (dg) => Math.sin(dg * (Math.PI / 180));
+		let Dcos = (dg) => Math.cos(dg * (Math.PI / 180));
+
+
+
+		function Rct(x1, y1, x3, y3, alpha) {
+			this.x1 = x1;
+			this.y1 = y1;
+			this.x3 = x3;
+			this.y3 = y3;
+			this.angle = alpha;
+
+		};
+
+
+
+
+		//Задание 1
+		//Функция принимает объект-прямоугольник и выводит
+		//информацию о нем (где какая точка расположена).
+
+		function verticesCoord(obj) {
+			let x1 = obj.x1;
+			let y1 = obj.y1;
+			let deg = obj.angle;
+			let x3 = obj.x3;
+			let y3 = obj.y3;
+			let x3a = Math.round(x1 + (x3 - x1) * Dcos(deg) - (y3 - y1) * Dsin(deg));
+			let y3a = Math.round(y1 + (x3 - x1) * Dsin(deg) + (y3 - y1) * Dcos(deg));
+			let x2a = x3a;
+			let y2a = y1;
+			let x2 = Math.round(x1 + (x2a - x1) * Dcos(deg) + (y2a - y1) * Dsin(deg));
+			let y2 = Math.round(y1 + (y2a - y1) * Dcos(deg) - (x2a - x1) * Dsin(deg));
+			let x4a = x1
+			let y4a = y3a;
+			let x4 = Math.round(x1 + (x4a - x1) * Dcos(deg) + (y4a - y1) * Dsin(deg));
+			let y4 = Math.round(y1 + (y4a - y1) * Dcos(deg) - (x4a - x1) * Dsin(deg));
+
+			let w = x3a - x1;
+			let h = y3a - y1;
+			return `Координаты вершин: \nA(${x1};${y1})\nB(${x2};${y2})\nC(${x3};${y3})\nD(${x4};${y4})`;
+		}
+
+
+		let rec1 = new Rct(500, 400, 10000, 650, 30);
+		console.log('Task#1 \n' + verticesCoord(rec1));
+
+		//Задание 2
+		//Функция принимает объект-прямоугольник и возвращает его ширину.
+		let recWidth = (obj) => Math.round(obj.x1 + (obj.x3 - obj.x1) * Dcos(obj.angle) - (obj.y3 - obj.y1) * Dsin(obj.angle)) - obj.x1;
+		console.log('\nTask#2 \nширина прямоугольника\n' + recWidth(rec1));
+
+		//Задание 3
+		//Функция принимает объект-прямоугольник и возвращает его высоту..
+		let recHeight = (obj) => Math.round(obj.y1 + (obj.x3 - obj.x1) * Dsin(obj.angle) + (obj.y3 - obj.y1) * Dcos(obj.angle)) - obj.y1;
+		console.log('\nTask#3 \nвысота прямоугольника\n' + recHeight(rec1));
+
+		//Задание 4
+		//Функция принимает объект-прямоугольник и возвращает его площадь..
+		let recArea = (obj) => recWidth(obj) * recHeight(obj);
+		console.log('\nTask#4 \nплощадь прямоугольника\n' + recArea(rec1));
+
+		//Задание 5
+		//Функция принимает объект-прямоугольник и возвращает его периметр
+		let recPerimeter = (obj) => 2 * (recWidth(obj) + recHeight(obj));
+		console.log('\nTask#5 \nпериметр прямоугольника\n' + recPerimeter(rec1));
+
+		//Задание 6
+		//Функция изменения ширины прямоугольника. 
+		//Она принимает объект-прямоугольник и на сколько единиц изменить ширину.
+
+		function widthChange(obj, newWidth) {
+			let x1 = obj.x1;
+			let y1 = obj.y1;
+			let x3 = obj.x3;
+			let y3 = obj.y3;
+			let deg = obj.angle;
+			let x3a = x1 + newWidth;
+			let y3a = Math.round(y1 + (x3 - x1) * Dsin(deg) + (y3 - y1) * Dcos(deg));
+			obj.x3 = Math.round(x1 + (x3a - x1) * Dcos(deg) + (y3a - y1) * Dsin(deg));
+			obj.y3 = Math.round(y1 + (y3a - y1) * Dcos(deg) - (x3a - x1) * Dsin(deg));
+			return obj;
+		}
+
+		console.log('\nTask#6 ');
+
+		console.log(widthChange(rec1, 300));
+		console.log('\nНовая ширина прямоугольника\n' + recWidth(rec1));
+
+
+		//Задание 7
+		//Функция изменения высоты прямоугольника. 
+		//Она принимает объект-прямоугольник и на сколько единиц изменить высоту
+
+		function heightChange(obj, newHeight) {
+			let x1 = obj.x1;
+			let y1 = obj.y1;
+			let x3 = obj.x3;
+			let y3 = obj.y3;
+			let deg = obj.angle;
+			let x3a = Math.round(x1 + (x3 - x1) * Dcos(deg) - (y3 - y1) * Dsin(deg));
+			let y3a = y1 + newHeight;
+			obj.x3 = Math.round(x1 + (x3a - x1) * Dcos(deg) + (y3a - y1) * Dsin(deg));
+			obj.y3 = Math.round(y1 + (y3a - y1) * Dcos(deg) - (x3a - x1) * Dsin(deg));
+			return obj;
+		}
+
+		console.log('\nTask#7 ');
+		console.log(heightChange(rec1, 200));
+		console.log('\nНовая высота прямоугольника\n' + recHeight(rec1));
+
+		//Задание 8
+		//Функция изменения высоты прямоугольника. 
+		//Она принимает объект-прямоугольник и два значения –
+		//для изменения ширины и высоты.
+
+		//Вариант1
+		let changesize1 = (obj, newWidth, newHeight) => (widthChange(heightChange(obj, newHeight), newWidth));
+		console.log('\nTask#8\n Variant1 ');
+		console.log(changesize1(rec1, 300, 200));
+		//Вариант2
+		function changesize2(obj, newWidth, newHeight) {
+			let x1 = obj.x1;
+			let y1 = obj.y1;
+			let x3 = obj.x3;
+			let y3 = obj.y3;
+			let deg = obj.angle;
+			let x3a = x1 + newWidth;
+			let y3a = y1 + newHeight;;
+			obj.x3 = Math.round(x1 + (x3a - x1) * Dcos(deg) + (y3a - y1) * Dsin(deg));
+			obj.y3 = Math.round(y1 + (y3a - y1) * Dcos(deg) - (x3a - x1) * Dsin(deg));
+			return obj;
+		}
+		console.log('\nVariant2 ');
+		console.log(changesize2(rec1, 300, 200));
+
+
+		//Задание 9
+		//Функция смещения прямоугольника по оси X. Она принимает объект-прямоугольник 
+		//и на сколько единиц его сдвинуть.
+
+		function shiftX(obj, deltaX = 0,) {
+			obj.x1 += deltaX;
+			obj.x3 += deltaX;
+			return obj;
+		}
+		console.log('\nTask#10');
+		console.log(shiftX(rec1, 300));
+
+		//Задание 10
+		//Функция смещения прямоугольника по оси Y. Она принимает объект-прямоугольник 
+		// и на сколько единиц его сдвинуть.
+
+		function shiftY(obj, deltaY,) {
+			obj.y1 += deltaY;
+			obj.y3 += deltaY;
+			return obj;
+		}
+		console.log('\nTask#10');
+		console.log(shiftY(rec1, 300));
+
+		//Задание 11
+		//Функция смещения прямоугольника и по оси X и по
+		//оси Y. Она принимает объект-прямоугольник и два значения: сдвиг по оси X и сдвиг по оси Y.
+		function shiftXY(obj, deltaX, deltaY) {
+			obj.x1 += deltaX;
+			obj.x3 += deltaX;
+			obj.y1 += deltaY;
+			obj.y3 += deltaY;
+			return obj;
+		}
+		console.log('\nTask#11');
+		console.log(shiftXY(rec1, 200, 300));
+
+		//Задание 12
+		//Функция для проверки, находится ли точка внутри прямоугольника. 
+		// Она принимает объект-прямоугольник и координаты точки.
+
+		function checkpoint(obj, pointX, pointY) {
+			let x1 = obj.x1;
+			let y1 = obj.y1;
+			let deg = obj.angle;
+			let x3 = obj.x3;
+			let y3 = obj.y3;
+			let x3a = Math.round(x1 + (x3 - x1) * Dcos(deg) - (y3 - y1) * Dsin(deg));
+			let y3a = Math.round(y1 + (x3 - x1) * Dsin(deg) + (y3 - y1) * Dcos(deg));
+			let pointXa = Math.round(x1 + (pointX - x1) * Dcos(deg) - (pointY - y1) * Dsin(deg));
+			let pointYa = Math.round(y1 + (pointX - x1) * Dsin(deg) + (pointY - y1) * Dcos(deg));
+			return (pointXa >= x1 && pointXa <= x3a && pointYa >= y1 && pointYa <= y3a) ? true : false;
+		}
+
+		let rec2 = new Rct(500, 400, 10000, 650, 25);
+		console.log('\nTask#12\n' + checkpoint(rec2, 800, 700));
+		console.log(checkpoint(rec2, 499, 400));
+
+	</script>
+</body>
+
+</html>

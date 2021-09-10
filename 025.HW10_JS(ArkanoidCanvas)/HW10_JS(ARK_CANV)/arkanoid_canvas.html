@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #info {
+            width: 900px;
+            height: 100px;
+            margin: 5px auto;
+            background: #95cf97;
+            border: 2px solid green;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        .subinfo {
+            width: 300px;
+            height: 40x;
+            padding: 5px;
+            justify-self: center;
+            align-self: center;
+            font-size: 1.6em;
+            text-align: left;
+            color: #0d5223;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="900" height="600"
+        style="background: #aef5b1;border :2px solid green;display: block; margin: 0 auto; cursor: none;"> </canvas>
+    <div id="info">
+        <div id="tmr1" class="subinfo"> Elapsed time 00:00:00</div>
+        <div id="scrs" class="subinfo">Scores:</div>
+        <div id="lvls" class="subinfo">Level 1 of 3</div>
+        <div id="lfs" class="subinfo">Remaining lifes: 3 </div>
+    </div>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let radius = 10;
+        let score = 0;
+        let life = 3;
+        let pz = 1;
+        let brickcounter = 0;
+        let movevement;
+        let totalscore = 0;
+        let gamelevel = 1;
+
+        // timer--------
+        let hrs = 0;
+        let minute = 0;
+        let second = 0;
+        let timer;
+        let gameOver = false;
+        let timeDisplay = {
+            hours: fixedValue(hrs),
+            minutes: fixedValue(minute),
+            seconds: fixedValue(second)
+        }
+        function timing() {
+            if ((second += 1) == 60) {
+                second = 0;
+                minute++;
+            }
+            if (minute == 60) {
+                minute = 0;
+                hrs++;
+            }
+            timeDisplay = { hours: fixedValue(hrs), minutes: fixedValue(minute), seconds: fixedValue(second) }
+            document.getElementById("tmr1").innerText = 'Elapsed time ' + Object.values(timeDisplay).join(":");
+        }
+        //end timer--------
+
+
+        //levels----
+
+        let levelsArray = ['',
+            { bricksrow: 2, ballspeeds: 2, bw: 150 },
+            { bricksrow: 3, ballspeeds: 4, bw: 150 },
+            { bricksrow: 4, ballspeeds: 4, bw: 80 }
+        ]
+        let barWidth = levelsArray[gamelevel].bw;
+        let barX = (canvas.width - barWidth) / 2;
+        let speed = levelsArray[gamelevel].ballspeeds;
+        let rows = levelsArray[gamelevel].bricksrow;
+        let dx = levelsArray[gamelevel].ballspeeds;
+        let dy = (-1) * levelsArray[gamelevel].ballspeeds;
+        //end levels---
+
+        let ball = {
+            x: 100,
+            y: 100,
+            start() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height - 5 - radius;
+            },
+            draw() {
+                this.radius = radius;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = "red";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+        ball.start();
+
+
+        let bar = {
+            height: 5,
+            dx: 10,
+            draw() {
+                this.width = levelsArray[gamelevel].bw;
+                this.x = barX;
+                ctx.beginPath();
+                ctx.rect(this.x, canvas.height - this.height, this.width, this.height);
+                ctx.fillStyle = "blue";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+
+        let bricks = {
+            columns: 12,
+            spacing: 5,
+            color: "orange",
+            brick: [],
+            create() {
+                this.rows = levelsArray[gamelevel].bricksrow;
+                this.width = (canvas.width - (bricks.columns + 1) * bricks.spacing) / bricks.columns;
+                this.height = this.width / 5;
+                for (let i = 0; i < this.rows; i++) {
+                    this.brick.push([])
+                    for (let j = 0; j < this.columns; j++) {
+                        this.brick[i].push({ x: 0, y: 0, status: true });
+                    }
+                }
+            },
+            draw() {
+                for (let i = 0; i < this.rows; i++) {
+                    for (let j = 0; j < this.columns; j++) {
+                        if (this.brick[i][j].status) {
+                            this.brick[i][j].x = j * bricks.width + (j + 1) * bricks.spacing;
+                            this.brick[i][j].y = 50 + i * bricks.height + (i + 1) * bricks.spacing;
+                            ctx.beginPath();
+                            ctx.rect(this.brick[i][j].x, bricks.brick[i][j].y, bricks.width, bricks.height);
+                            ctx.fillStyle = bricks.color;;
+                            ctx.fill();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+        }
+        bricks.create();
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bricks.draw();
+            ball.draw();
+            ball.x += dx;
+            ball.y += dy;
+            bar.draw();
+            if (ball.x + dx > canvas.width - ball.radius || ball.x + dx < ball.radius) dx = -dx;
+            if (ball.y + dy < ball.radius) {
+                dy = -dy;
+            } else if (ball.y + dy > canvas.height - ball.radius - bar.height && ball.x > bar.x && ball.x < bar.x + bar.width) {
+                dy = -dy;
+            } else if (ball.y + dy > canvas.height - ball.radius) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (life > 0) {
+                    life--;
+                    document.getElementById("lfs").innerText = 'Remaining lifes: ' + life;
+                    ball.x = canvas.width / 2;
+                    ball.y = canvas.height - 5 - radius;
+                    barX = (canvas.width - bar.width) / 2;
+                    bricks.draw();
+                    ball.draw();
+                    bar.draw();
+                    timeOff();
+                    pz++;
+                } else {
+                    gameOver = true;
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = 'green';
+                    ctx.font = "56px serif";
+                    ctx.fillText("YOU LOSE", canvas.width / 2, canvas.height / 2);
+                    ctx.fillText("CAME OVER", canvas.width / 2, (canvas.height + 100) / 2);
+                    timeOff();
+                }
+            }
+            collision();
+        }
+        draw();
+
+
+
+        document.onkeydown = function (e) {
+            if (e.keyCode == 32) {
+                if (pz % 2 != 0 && gameOver == false) {
+                    timeOn();
+                } else {
+                    timeOff();
+                }
+                pz++;
+            }
+            if (pz % 2 == 0) {
+                if (e.keyCode == 39) {
+                    barX += bar.dx;
+                    if (barX > canvas.width - bar.width) barX = canvas.width - bar.width;
+                }
+                if (e.keyCode == 37) {
+                    barX -= bar.dx;
+                    if (barX < 0) barX = 0;
+                }
+                draw();
+            }
+        }
+
+
+        canvas.onmousemove = function (e) {
+            if (pz % 2 == 0) {
+                barX = e.pageX - canvas.offsetLeft - bar.width / 2;
+                if (barX < 0) barX = 0;
+                if (barX > canvas.width - bar.width) barX = canvas.width - bar.width;
+            }
+        }
+
+        function timeOn() {
+            timeOff();
+            timer = setInterval(() => { timing(); }, 1000);
+            movevement = setInterval(draw, 10);
+
+        }
+        function timeOff() {
+            clearInterval(timer);
+            clearInterval(movevement);
+        }
+
+        function fixedValue(t) { return t < 10 ? "0" + t : t; }
+
+        function collision() {
+            for (let i = 0; i < bricks.rows; i++) {
+                for (let j = 0; j < bricks.columns; j++) {
+                    let br = bricks.brick[i][j]
+                    if (br.status) {
+                        if (ball.x + radius > br.x && ball.x - radius < br.x + bricks.width && ball.y + radius > br.y && ball.y - radius < br.y + bricks.height) {
+                            br.status = false;
+                            dy = -dy;
+                            brickcounter += 1;
+                            score += 100;
+                            totalscore += score;
+                            document.getElementById("scrs").innerText = 'Scores  ' + totalscore;
+                            if (score == bricks.rows * bricks.columns * 100) {
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                if (gamelevel < 3) {
+                                    gamelevel += 1;
+                                    document.getElementById("lvls").innerText = 'Level  ' + gamelevel + 'of 3';
+                                    ball.x = canvas.width / 2;
+                                    ball.y = canvas.height - 5 - radius;
+                                    barX = (canvas.width - levelsArray[gamelevel].bw) / 2;
+                                    for (let m = 0; m < bricks.rows; m++) {
+                                        for (let n = 0; n < bricks.columns; n++) {
+                                            bricks.brick[m][n].status = true;
+                                        }
+                                    }
+                                    score = 0;
+                                    bricks.create();
+                                    bricks.draw();
+                                    ball.draw();
+                                    bar.draw();
+                                    dx = levelsArray[gamelevel].ballspeeds;
+                                    dy = (-1) * levelsArray[gamelevel].ballspeeds;
+                                    timeOff();
+                                    pz++;
+                                } else {
+
+                                    ctx.fillStyle = 'green';
+                                    ctx.font = "56px serif";
+                                    ctx.textAlign = 'center';
+                                    ctx.fillText("CONGRATULATIONS! ", canvas.width / 2, canvas.height / 2);
+                                    ctx.fillText("YOU WON! ", canvas.width / 2, (canvas.height + 100) / 2);
+                                    gameOver = true;
+                                    timeOff();
+                                    // pz++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

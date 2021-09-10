@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+        alert('Задание 5' +
+            '\nСоздать html-страницу со списком книг.' +
+            'При щелчке на книгу, цвет фона должен меняться на оранжевый.' +
+            'Учтите, что при повторном щелчке на другую книгу, предыдущей – ' +
+            'необходимо возвращать прежний цвет.');
+
+
+        let list = ['“JavaScript for Kids: A Playful Introduction to Programming” by Nick Morgan',
+            '"Eloquent JavaScript: A Modern Introduction to Programming" by Marijn Haverbeke',
+            '"JavaScript: The Good Parts" by Douglas Crockford',
+            '"Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Moderns JS Libraries” by Eric Elliott',
+            '"Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript" by David Herman',
+            '"JavaScript: The Definitive Guide" by David Flanagan "You Dont Know JS" by Kyle Simpson'];
+
+        let ol1 = document.createElement('ol');
+        ol1.style.cursor = 'pointer';
+        document.body.appendChild(ol1);
+
+        class List {
+            static create(id, text) {
+                let li = document.createElement('li');
+                li.id = id;
+                li.innerText = text;
+                li.className = 'item';
+                li.onclick = myFunction;
+                ol1.appendChild(li);
+            }
+        }
+        for (let i = 0; i < list.length; i++) List.create('lst' + i, list[i]);
+        let items = document.getElementsByClassName("item");
+        function myFunction(event) { for (let i = 0; i < items.length; i++)  items[i].style.backgroundColor = (event.target.id == items[i].id) ? "orange" : 'inherit'; }
+
+    </script>
+</body>
+
+</html>

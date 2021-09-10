@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HW3_Task1</title>
+	<!-- Задание_1 : При нажатии на "Ок"  записать числа от указанного в input'е до 1 через запятую -->
+</head>
+
+<body>
+
+	<div >
+		<input id="number" type="number">
+		<button id="ok" onclick="newdt()">Ok</button>
+		<span id="outdata"></span>
+	</div>
+	<script>
+		const number = document.getElementById("number");
+		const outdata = document.getElementById("outdata");
+		number.value=10;
+		function newdt(){
+			let n= number.value;
+			let kod = "";
+			for (let i = n; i >= 1; i--) { 
+                kod += (i > 1) ? i + " , " : i;
+            }			
+			outdata.innerHTML = kod ;		
+		}
+	</script>
+</body>
+
+</html>

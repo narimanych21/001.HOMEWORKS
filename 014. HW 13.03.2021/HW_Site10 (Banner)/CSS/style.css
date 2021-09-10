@@ -1,0 +1,306 @@
+  @font-face {
+		font-family: 'Michelin Bold';
+		src: url('Michelin-Bold.eot');
+		src: url('Michelin-Bold.eot?#iefix') format('embedded-opentype'),
+		url('Michelin-Bold.woff') format('woff'),
+		url('Michelin-Bold.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+}
+  
+  * { box-sizing: border-box; }
+            body { margin: 0; }
+			
+#banner {
+    position: relative;
+    border: 1px solid silver;
+    width: 320px; 
+    height: 50px;
+    background:#e3f2fd ;
+    overflow: hidden;
+	margin:0 auto;
+	margin-top:60px;
+}
+#wrds{
+	font:bold 0.8em 'PT Sans', sans-serif;
+	color:#020275;		
+}
+#wheel{
+	position: absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:50px;
+	border-radius:50%;
+	background: url('../img/wheel.png') center/cover no-repeat;
+	animation-name:wll2;
+	animation-duration: 0.8s;
+    animation-timing-function: linear;
+	animation-fill-mode: forwards;
+    z-index: 2 ;
+
+}
+
+#w1	{
+	position: absolute;
+	height:16px;
+	width:110px;
+	top:0px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w1;
+	animation-delay:1s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+				
+}
+#w2	{
+	position: absolute;
+	height:16px;
+	width:110px;
+	top:14px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w2;
+	animation-delay:2s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+}	
+			
+#w3	{
+	position: absolute;
+	height:16px;
+	width:160px;
+	top:30px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w3;
+	animation-delay:3s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+}		
+#misha{
+	position: absolute;
+	height:55px;
+	width:55px;
+	top:-5px;
+	left:0;
+	background: url('../img/misha.png') center/cover no-repeat;
+	opacity:0;
+	animation-name:misha;
+	animation-delay:4s;
+	animation-duration:2s;
+	animation-fill-mode: forwards;
+}
+
+
+
+
+
+
+
+@media only screen and (min-width: 576px) {
+#banner {
+    position: relative;
+    border: 1px solid silver;
+    width: 468px; 
+    height:60px;
+    background:#e3f2fd ;
+    overflow: hidden;
+	margin:0 auto;
+	margin-top:60px;
+}
+
+#wheel{
+	position: absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:60px;
+	border-radius:50%;
+	background: url('../img/wheel.png') center/cover no-repeat;
+	animation-name:wll;
+	animation-duration: 0.8s;
+    animation-timing-function: linear;
+	animation-fill-mode: forwards;
+    z-index: 2 ;
+}
+#wrds{
+	font:bold 1.2em 'PT Sans', sans-serif;
+	color:#020275;
+	
+}
+#w1	{
+	position: absolute;
+	height:20px;
+	width:160px;
+	top:0px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w1;
+	animation-delay:1s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+	
+				
+}
+#w2	{
+	position: absolute;
+	<--background-color:green;-->
+	height:20px;
+	width:160px;
+	top:15px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w2;
+	animation-delay:2s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+}	
+			
+#w3	{
+	position: absolute;
+	height:20px;
+	width:160px;
+	top:32px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w3;
+	animation-delay:3s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+}		
+
+#misha{
+	position: absolute;
+	height:65px;
+	width:65px;
+	top:-5px;
+	left:0;
+	background: url('../img/misha.png') center/cover no-repeat;
+	opacity:0;
+	animation-name:misha;
+	animation-delay:4s;
+	animation-duration:2s;
+	animation-fill-mode: forwards;
+}
+
+}
+
+@media only screen and (min-width: 768px) {
+#banner {
+    position: relative;
+    border: 1px solid silver;
+    width: 728px; 
+    height:90px;
+    background:#e3f2fd ;
+    overflow: hidden;
+	margin:0 auto;
+	margin-top:60px;
+}
+#wheel{
+	position: absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:90px;
+	border-radius:50%;
+	background: url('../img/wheel.png') center/cover no-repeat;
+	animation-name:wll;
+	animation-duration: 0.8s;
+    animation-timing-function: linear;
+	animation-fill-mode: forwards;
+    z-index: 2 ;
+
+}
+
+#wrds{
+	font:bold 1.8em 'PT Sans', sans-serif;
+	color:#020275;		
+}
+#w1	{
+	position: absolute;
+	height:30px;
+	width:250px;
+	top:0;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w1;
+	animation-delay: 1s;
+	animation-duration: 0.8s;
+	animation-fill-mode: forwards;
+	text-align:center;
+				
+			}
+	#w2	{
+	position: absolute;
+	height:30px;
+	width:250px;
+	top:25px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w2;
+	animation-delay:2s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+}	
+			
+#w3	{
+	position: absolute;
+	height:30px;
+	width:300px;
+	top:52px;
+	left:-300px;
+	z-index: 5 ;
+	animation-name:w3;
+	animation-delay:3s;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;
+}		
+#misha{
+	position: absolute;
+	height:100px;
+	width:100px;
+	top:-10px;
+	left:0;
+	background: url('../img/misha.png') center/contain no-repeat;
+	background-size:100%;
+	opacity:0;
+	animation-name:misha;
+	animation-delay:4s;
+	animation-duration:2s;
+	animation-fill-mode: forwards;
+}
+
+
+
+}
+
+
+ @keyframes wll {
+                0%    {transform: rotate(0deg)   ;left: -20%;  }
+                100%  {transform: rotate(360deg) ;left: 88%;}
+}
+ @keyframes wll2 {
+                0%    {transform: rotate(0deg)   ;left: -20%;  }
+                100%  {transform: rotate(720deg) ;left: 85%;}
+}
+@keyframes w1 {
+                0%    {left:-300px;}
+                100%  {left:20.6%;}
+}
+@keyframes w2 {
+                0%    {left:-300px;}
+                100%  {left:37.8%;}
+}
+		
+@keyframes w3 {
+                0%    {left:-300px;}
+                100%  {left:46.7%;}
+}
+		
+@keyframes misha {
+    0%   {opacity: 0;}
+    100%  {opacity: 100%;}
+}
+

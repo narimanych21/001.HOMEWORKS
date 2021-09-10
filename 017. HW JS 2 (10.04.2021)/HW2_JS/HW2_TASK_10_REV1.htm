@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Task_10 Play with Date</title>
+        <style>
+			div {padding: 100px;width:700px;}
+		    h2,input{text-align:center;}
+			#hrsvalue{width:40px;}
+		</style>
+    </head>
+    <body>
+		
+		<div >
+				<h2 >Play with Time and Date</h2>
+				<p>
+					начальная дата: <input id="date1"type="date" onchange="newdt()"/> +
+					<input id="hrsvalue" type="number" onchange="newdt()" >часов = 
+					конечная дата: <input id="date2"type="date" />
+				</p>			
+		</div>
+
+
+		<script>
+			const date1 = document.getElementById("date1");
+			const date2 = document.getElementById("date2");
+			const hrsvalue = document.getElementById("hrsvalue");
+			date1.valueAsDate = new Date();
+			date2.valueAsDate = new Date();
+			date2.disabled = true;
+			
+			function newdt(){
+			let dt1=date1.valueAsDate.getTime();
+			let dt2;
+			let dt3;
+			let hrs=hrsvalue.value;
+			dt2=dt1+(hrs*3600000);
+			dt3=new Date(dt2).toString();
+			
+			date2.valueAsDate = new Date(dt3);
+			}
+		
+		
+        </script>
+    </body>
+</html>

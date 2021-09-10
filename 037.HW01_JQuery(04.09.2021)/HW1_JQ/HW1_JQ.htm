@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            .hamburger{
+                position:absolute;
+                top:0;
+                right:0;
+                line-height:40px;
+                border:none;
+                background:none;
+                color:#ff5100;
+                font:1.5em bold;
+                cursor:pointer;
+                z-index:3;
+            }
+            ul{margin : 0;padding:0}
+            a{ text-decoration:none;color:#ff5100;font:1em bold;}
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <button id ="menu"class="hamburger">&#9776;</button>
+        </header>
+      
+        <div id="container" >
+            <ul >
+                <a href=""><li>One</li></a>
+				<a href=""><li>Two</li></a>
+                <a href=""><li>Three</li></a>
+                <a href=""><li>Four</li></a>
+                <a href=""><li>Five</li></a>
+                <a href=""><li>Six</li></a>
+            </ul>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>     
+        <script>
+            $(() =>{
+                Resizing();
+                $(window).resize(Resizing)  
+                $("#menu" ).click(function(){
+                    $("ul").show();
+                    $("#container").slideToggle(1000);
+                }); 
+                $("li")
+                    .mouseenter( function() {$(this).css({backgroundColor:"#ffdccc",color:"#ff5100"})})
+                    .mouseleave( function() {$(this).css({backgroundColor:"#ffaa80",color:"#ffdccc"})})
+                    $(document).mouseup(function (e){
+                        if (document.body.clientWidth <=768 && !$("#container").is(e.target)) $("#container").hide();    
+                    });    
+
+            });
+
+            function Resizing() {
+                if (document.body.clientWidth <=768){
+                        $("#menu").show();
+                        $("#container").hide();
+                        $("li").css({display:"block",padding:"10px 30px",margin:"10px 20%",textAlign:"center",backgroundColor:"#ffaa80"})   
+                    }else{
+                        $("#menu").hide();
+                        $("#container").show();
+                        $("li").css({display: "inline-block",padding:"10px 40px",margin : "0" ,textAlign:"center",backgroundColor:"#ffaa80" }) 
+                    }
+            }
+        </script>
+
+
+        
+    </body>
+</html>

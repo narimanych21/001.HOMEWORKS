@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW4_3JS</title>
+        <style>
+            table {border-collapse: collapse;}
+            td { width: 50px; height: 50px; border: 1px solid gray; text-align: center;}
+        </style>
+    </head>
+    <body>
+        <table id="tbl"></table>
+
+        <script>
+            const tbl = document.getElementById("tbl");
+            let kod = "";
+            let x = '';
+           for(let i= 1; i <= 5; i++){
+                kod += "<tr>"
+				x=i
+                for(let j = 1; j <= 5; j++) {
+					x = (j % 2) ? j : "";
+                    kod += "<td>" + x + "</td>";
+					x++;  
+                }
+                kod += "</tr>";
+            } 
+
+            tbl.innerHTML = kod;
+        </script>
+    </body>
+</html>

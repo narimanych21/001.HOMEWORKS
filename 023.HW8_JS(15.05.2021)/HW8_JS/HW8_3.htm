@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW8_3</title>
+ 
+    </head>
+    <body onload="timeShow()" >
+		<div >
+			<h2 id="inf"></h2>
+			<input type="number" id="hrs" min ="0"  max="23" placeholder="hours">
+			<input type="number" id="min" min ="0"  max="59" placeholder="minutes">
+			<input type="number" id="sec" min ="0"  max="59"placeholder="seconds"><br><br>
+			
+			<button onclick = "newtimeShow( )"> New time </button>
+		
+			<h2 id="newtime"></h2>
+		</div>
+		
+        <script>
+			const inf = document.getElementById("inf");
+			const hrs = document.getElementById("hrs");
+			const min = document.getElementById("min");
+			const sec = document.getElementById("sec");
+			
+			const newtime = document.getElementById("newtime");
+			let timeDisplay = {hours:21, minutes:39, seconds:23};
+		
+			function newtimeShow( ){
+				let x={hours:+hrs.value, minutes:+min.value, seconds:+sec.value};
+				let y=correctingTime(timeDisplay,x);
+				 for (let key in  y ){
+					if ((y[key]).toString().length<2 ) y[key]="0"+(y[key]).toString();
+				 }
+				newtime.innerHTML = Object.values(y).join(":");
+			 }
+			
+			function timeShow( ){
+				inf.innerHTML = Object.values(timeDisplay).join(":");
+			 }
+			
+			
+			function correctingTime(a,b){
+				let hrs = 0;
+				let mnts = 0;
+				let secnd = 0;
+				if (a.seconds+ b.seconds >= 60){
+					secnd += a.seconds + b.seconds - 60 ;
+					mnts++;	
+				}else{
+					secnd += a.seconds + b.seconds;
+				}
+				if (mnts + a.minutes+b.minutes>=60){
+					mnts += a.minutes + b.minutes - 60 ;
+					hrs++;	
+				}else{
+					mnts += a.minutes + b.minutes;
+				}
+				
+				if (a.hours+b.hours>=24){
+					hrs+=a.hours+b.hours-24;
+				}else{
+					hrs+=a.hours+b.hours
+				}
+				 return {hours:hrs, minutes:mnts, seconds:secnd};
+	
+			}
+	
+        </script>
+    </body>
+</html>

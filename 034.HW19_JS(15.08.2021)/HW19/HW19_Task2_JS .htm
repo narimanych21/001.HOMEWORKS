@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+   
+	<script>
+        alert('Задание 2'+		
+		'\nСоздать html-страницу с кнопкой Открыть и модальным'+
+		'окном. На модальном окне должен быть текст и кнопка Закрыть.'+
+		'Изначально модальное окно не отображается. При клике на'+
+		'кнопку Открыть появляется модальное окно, на кнопку Закрыть –исчезает.');
+
+
+        let gen =document.createElement("div");
+            gen.id='main';
+            gen.style.left='0';
+            gen.style.top="0";
+            gen.style.width='100%';
+            gen.style.height='100%';
+            gen.style.paddingTop='50px';
+            gen.style.display='none';
+            gen.style.position='fixed'
+            gen.style.zIndex='2'; 
+            gen.style.backgroundColor= 'rgba(238,234,247,0.7)';
+            document.body.appendChild(gen);
+
+        let modWin =document.createElement("div");
+            modWin.id='win';
+            modWin.style.margin='auto';
+            modWin.style.padding="20px 0";
+            modWin.style.backgroundColor='#fff' ;
+            modWin.style.border='1px solid #aaa';
+            modWin.style.boxShadow='2px 5px #ccc'
+            modWin.style.width='350px';
+            gen.appendChild(modWin);
+
+        let txt1 =document.createElement("h3");
+            txt1.innerText='Hello from Modal Window';
+            txt1.style.textAlign='center';
+            modWin.appendChild(txt1);
+
+        let btn1= document.createElement("button"); 
+            btn1.id='open';
+            btn1.innerText='Open';
+            document.body.appendChild(btn1);
+
+
+        let btn2= document.createElement("button"); 
+            btn2.id='close';
+            btn2.innerText='Close';
+            btn2.style.width='90%';
+            btn2.style.margin='0 auto';
+            btn2.style.display='block';
+            modWin.appendChild(btn2);
+
+            btn1.addEventListener('click',(e)=>{gen.style.display='block'});
+            btn2.addEventListener('click',(e)=>{gen.style.display='none'});
+	</script>
+</body>
+
+</html>

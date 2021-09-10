@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+        alert('Задание 4' +
+            '\nССоздать html-страницу со светофором и кнопкой, которая ' +
+            'переключает светофор на следующий цвет.');
+
+        let frm = document.createElement("div");
+        frm.style.display = 'flex';
+        frm.style.width = '450px';
+        frm.style.border = '1px solid grey';
+        frm.style.borderRadius = '10px';
+        frm.id = 'mainFrame';
+        frm.style.backgroundColor = '#faffe0';
+        document.body.appendChild(frm);
+
+        let fr = document.createElement("div");
+        fr.style.width = '300px';
+        fr.style.padding = '10px';
+        fr.style.border = '1px solid grey';
+        fr.style.borderRadius = '10px';
+        fr.style.margin = '10px';
+        fr.id = 'lightFrame';
+        fr.style.backgroundColor = '#eee';
+        frm.appendChild(fr);
+
+        class Light {
+            static create(n) {
+                let elem = document.createElement("div");
+                elem.id = 'light' + n;
+                elem.style.background = '#ccc';
+                elem.style.margin = '0 10px';
+                elem.style.width = ' 80px';
+                elem.style.height = '80px';
+                elem.style.borderRadius = '50%';
+                elem.style.display = 'inline-block';
+                lightFrame.appendChild(elem);
+
+            }
+        }
+        let colors = ['red', 'yellow', 'green'];
+        let lights = [];
+        for (let i = 1; i <= 3; i++) {
+            Light.create(i);
+            lights.push('light' + i)
+        }
+
+        let btn = document.createElement("button");
+        btn.id = 'button';
+        btn.innerText = 'NEXT';
+        btn.style.margin = '10px ';
+        btn.style.border = '1px solid grey';
+        btn.style.borderRadius = '10px ';
+        btn.style.cursor = "pointer";
+        btn.style.backgroundColor = '#bbb'
+        btn.style.height = fr.offsetHeight + 'px';
+        frm.appendChild(btn);
+
+        btn.addEventListener('mouseover', (e) => btn.style.backgroundColor = '#888');
+        btn.addEventListener('mouseout', (e) => btn.style.backgroundColor = '#bbb');
+        btn.addEventListener('click', changeLight, false);
+
+        let counter = 0;
+        function changeLight() {
+            lights.forEach((item, index) => document.getElementById(item).style.backgroundColor = (index == (counter % 3)) ? colors[index] : '#ccc');
+            counter += 1;
+        }
+    </script>
+</body>
+
+</html>

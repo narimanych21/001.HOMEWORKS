@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW7_4</title>
+ 
+    </head>
+    <body onload="loadСlassroomsList()">
+		
+			<div id="div1">
+				<h3>Список аудиторий</h3>
+				<ol id="ol1"></ol>				
+			
+				<h3>Список аудиторий  по факультету</h3>
+				<select id="fac">
+					<option value="математика">математика</option>
+					<option value="химия">химия</option>
+					<option value="физика">физика</option>	
+				</select>	
+				<button onclick="sortByFaculty()">Вывести</button>	
+				<ul id="ul1"></ul>
+				
+				<h3>Список аудиторий  для данной группы</h3>
+				<h4 id ="gruppa"></h4>
+				<button onclick="sortByGroup()">Вывести</button>	
+				<ul id="ul2"></ul>
+				
+				<h3>Сортировка по количеству мест</h3>
+				<button onclick="sortByPlace()">Сортировать</button>	
+				<ul id="ul3"></ul>
+				
+				<h3>Сортировка по алфавиту</h3>
+				<button onclick="sortByName()">Сортировать</button>	
+				<ul id="ul4"></ul>
+				
+			</div>
+		
+        <script>
+			const ol1 = document.getElementById("ol1");
+			const ul1 = document.getElementById("ul1");
+			const ul2 = document.getElementById("ul2");
+			const ul3 = document.getElementById("ul3");
+			const ul4 = document.getElementById("ul4");			
+			const fac = document.getElementById("fac");
+			const gruppa = document.getElementById("gruppa");
+			
+			let classroom1 = {name:"кабинет7", faculty:"математика", pl: "мест:" ,seats: 10 };
+			let classroom2 = {name:"кабинет6", faculty:"химия" ,     pl: "мест:" ,seats: 20 };
+			let classroom3 = {name:"кабинет2", faculty:"физика",     pl: "мест:" ,seats: 15 };			
+			let classroom4 = {name:"кабинет4", faculty:"химия",      pl: "мест:" ,seats: 10 };			
+			let classroom5 = {name:"кабинет3", faculty:"физика",     pl: "мест:" ,seats: 20 };
+			let classroom6 = {name:"кабинет8", faculty:"математика", pl: "мест:" ,seats: 15 };			
+			let classroom7 = {name:"кабинет1", faculty:"физика",     pl: "мест:" ,seats: 10 };		
+			let classroom8 = {name:"кабинет9", faculty:"математика", pl: "мест:" ,seats: 20 };
+			let classroom9 = {name:"кабинет5", faculty:"химия",      pl: "мест:" ,seats: 15 };
+			
+			let group={name:"группа1",faculty:"химия",students: 12};
+			let classrooms =[classroom1,classroom2,classroom3,classroom4,classroom5,classroom6,classroom7,classroom8,classroom9];
+			let sortfac=[];
+			let sortgroup=[];
+			
+			
+			gruppa.innerHTML=Object.values(group).join("  ")+'студентов';
+			
+			function loadСlassroomsList(){
+				kod="";
+				for(let i=0;i<classrooms.length;i++){
+					kod += '<li id="li'+i+ '">' + Object.values(classrooms[i]).join("  ") +'</li>';
+				}
+				ol1.innerHTML = kod;
+			}
+				
+			function sortByFaculty(){
+				sortfac = classrooms.filter(classrooms => classrooms.faculty == fac.value );
+				kod="";
+				for(let i=0; i < sortfac.length;i++){
+					kod += '<li>'+ Object.values(sortfac[i]).join("   ") +'</li>'	
+				}
+				ul1.innerHTML = kod;
+			}
+			
+			function sortByGroup(){
+				sortgroup = classrooms.filter(classrooms => classrooms.faculty == group.faculty && classrooms.seats >= group.students);
+				kod="";
+				for(let i=0; i < sortgroup.length;i++){
+					kod += '<li>'+ Object.values(sortgroup[i]).join("   ") +'</li>'	
+				}
+				ul2.innerHTML = kod;
+			}
+			
+			function sortByPlace(){
+				let byPlace=classrooms.slice();
+				byPlace=byPlace.sort(sortSeats);
+				
+				kod="";
+				for(let i=0;i<byPlace.length;i++){
+				  kod += '<li id="li'+i+ '">' + Object.values(byPlace[i]).join("  ") +'</li>';												
+				}
+				ul3.innerHTML = kod;
+			}	
+				
+			function sortByName(){
+				let byName=classrooms.slice();
+				byName=byName.sort(sortNames);
+				
+				kod="";
+				for(let i=0;i<byName.length;i++){
+				  kod += '<li id="li'+i+ '">' + Object.values(byName[i]).join("  ") +'</li>';												
+				}
+				ul4.innerHTML = kod;
+			}	
+
+			function sortSeats(a, b){
+				return  (a.seats - b.seats) ;          
+            }	
+				
+			function sortNames(a, b){
+				return (a.name < b.name ) ? -1:1;			       
+            }	
+	
+        </script>
+    </body>
+</html>

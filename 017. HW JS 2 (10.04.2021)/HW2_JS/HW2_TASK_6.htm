@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Task_6 Currency Converter</title>
+        <style>
+			div {padding: 100px; width:500px;}
+		    h2,input{text-align:center;}
+		</style>
+    </head>
+    <body>
+		
+		<div >
+				<h2 >Currency Converter</h2>
+				<input id="val1"  type="number" onchange="converting()">
+				<select id="select1" onchange="converting()">
+				  <option>USD</option>
+				  <option>AZN</option>
+				  <option>EUR</option>
+				</select> 
+				<span>=</span>
+				<select id="selct2" onchange="converting()">
+				  <option>USD</option>
+				  <option>AZN</option>
+				  <option>EUR</option>
+				</select>
+				<input id="val2"  type="number"  > 				
+		</div>
+
+
+		<script>
+			const USD_AZN = 1.7;
+			const USD_EUR = 0.85;
+			const EUR_AZN = 2.002;
+			const VAL1 = document.getElementById("val1");
+			const VAL2 = document.getElementById("val2");
+			const SELECT1 = document.getElementById("select1");
+			const SELECT2 = document.getElementById("selct2");
+			
+			VAL1.value = 1;
+			VAL2.disabled = true;
+			SELECT2.value='AZN';
+			VAL2.value = USD_AZN;
+		
+			function converting(){
+			let selind1= SELECT1.options.selectedIndex;
+			let selind2= SELECT2.options.selectedIndex;
+			let money1=VAL1.value;
+			let money2;
+				
+			
+			(selind1 == 0 && selind2 == 1) ? money2 = money1 * USD_AZN :
+			(selind1 == 0 && selind2 == 2) ? money2 = money1*USD_EUR :
+			(selind1 == 1 && selind2 == 0) ? money2 = money1/USD_AZN :
+			(selind1 == 1 && selind2 == 2) ? money2 = money1/EUR_AZN :
+			(selind1 == 2 && selind2 == 0) ? money2 = money1/USD_EUR:
+			(selind1 == 2 && selind2 == 1) ? money2 = money1*EUR_AZN:
+			(selind1 == selind2) ? money2=money1*1:"";
+			VAL2.value = money2.toFixed(2) ;
+			}
+		
+		
+		
+        </script>
+    </body>
+</html>

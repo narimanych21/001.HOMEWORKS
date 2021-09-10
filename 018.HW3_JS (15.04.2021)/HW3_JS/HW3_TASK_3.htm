@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HW3_Task3</title>
+	<style>
+		input{width:60px}
+	</style>
+</head>
+<!-- Задание_3 : При нажатии на "Ок"  записать числа от 1 до числа ,
+     указанного 1-ом input'е  , с шагом, указанным во 2-ом input'е -->
+<body>
+
+	<div >
+		<input id="topedge" type="number">
+		<input id="number" type="number">
+		<button id="ok" onclick="newdt()" >Ok</button>
+		<span  id="outdata"></span>
+	</div>
+	<script>
+		const topedge = document.getElementById("topedge");
+		const number = document.getElementById("number");
+		const outdata = document.getElementById("outdata");
+		topedge.value = 10;
+		number.value = 2;
+		function newdt(){
+			let n = +topedge.value;
+			let step = +number.value;
+			let kod = "";
+			for (let i = 1; i <= n; i+=step) { 
+                kod +=  (i > 1) ?  " , " + i  : i;				
+            }			
+			outdata.innerHTML = kod ;		
+		}
+	</script>
+</body>
+
+</html>

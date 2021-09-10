@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_1</title>
+    </head>
+    <body>
+        <script>
+			let sum=0;
+			let x0,x1;
+			let min, max;
+			do {	x0 = prompt("Расчет суммы чисел в диапазоне.\nВведите нижнюю границу диапазона (целое число)");
+			}while ((min = +x0) != parseInt(x0));
+			do {	x1 = prompt("Расчет суммы чисел в диапазоне.\nВведите верхнюю границу диапазона (целое число)");
+			} while ((max = +x1) != parseInt(x1));
+  			if (min >= max ) {
+				alert("Нижняя граница больше или равна верхней. \nНачните задачу заново.");
+			}else{
+			for (let i=min; i<=max;i++)	sum+=i;	
+			alert("Расчет суммы чисел в диапазоне.\nСумма всех чисел в заданном диапазоне равна  " + sum);
+			}
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW7_3</title>
+ 
+    </head>
+    <body>
+		<button onclick= "formatting('Hello word! (not world)')" >Run function</button>
+	
+        <script>
+			let color={name:"color",value:"#3344aa"};
+			let font={name:"font-size",value:"1.6em"};
+			let aligment={name:"text-align",value:"center"};
+			let styles = [color,font,aligment];
+
+			function formatting(wrd){		
+				 document.write('<p style="'+ styles[0].name + ':'+ styles[0].value + ';'
+											+ styles[1].name + ':'+ styles[1].value + ';'
+											+ styles[2].name + ':'+ styles[2].value + ';'
+											+ '"' +'>'+wrd+'<p>');
+			}
+
+			
+			
+        </script>
+    </body>
+</html>

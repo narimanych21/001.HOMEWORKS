@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<head>
+	<meta charset="UTF-8">
+	<title>HW3_Task4</title>
+	<style>
+        table { margin: 10px 0;border-collapse: collapse;text-align: center }
+        td { width: 30px; height: 30px; border: 2px solid #FF6347;color:#FF6347 }
+    </style>
+</head>
+<!-- Задание_4 : При нажатии на "Ок"  записать числа от указанного в input'е до 1 
+     в ячейки таблицы -->
+<body>	
+	<div >
+		<input id="number" type="number">
+		<button id="ok" onclick="newdt()"  >Ok</button>
+	</div>
+	<table><tr id="rw"></tr></table>	
+	<script>
+		const number = document.getElementById("number");
+		const rw = document.getElementById("rw");
+		number.value= 10 ;
+		function newdt(){
+			let n= + number.value;
+			let kod = "";
+			for (let i = n; i >= 1; i--) { 
+                kod += '<td>' + i + '</td>';
+          }			
+			rw.innerHTML = kod ;		
+		}
+	</script>
+</body>
+
+</html>

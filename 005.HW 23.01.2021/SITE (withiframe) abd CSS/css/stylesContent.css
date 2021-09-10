@@ -1,0 +1,80 @@
+*{
+	font-family: Calibri, Helvetica, sans-serif;
+	text-align: justify;
+	padding: 0 20px 0 20px;
+}
+body{
+	background:fff;
+	padding:30px 0;
+}
+
+hr{
+	width:90%;
+	align:center;
+	height:5px; 
+	background:silver;
+	clear:both;
+}
+dt{
+	font: italic  400 2.4em Arial, Helvetica, sans-serif;
+}
+dt{
+	font:  1.5em Arial, Helvetica, sans-serif;
+	padding:20px;
+}
+.H150{
+	height:150px;
+	margin: 20px;
+	float: left;
+	
+}
+
+.H170{
+	height:170px;
+	margin: 20px;
+	float: left;
+	
+}
+
+.H200{
+	height:200px;
+	margin: 20px;
+	float: left;
+}
+.H250{
+	height:250px;
+	margin: 20px;
+	float: left;
+	
+}
+.H450{
+	height:450px;
+	margin: 20px;
+	float: left;
+	
+}
+
+.flright{
+	float: right;
+	margin-left: 20;
+}
+.UV{
+	clear:both;
+	height:0;
+    width:0;	
+}
+.st{
+	clear:both;
+}
+h4{
+	text-decoration:underline;
+	
+	
+}
+.alignLeft {
+	text-align: left;
+}
+.up{
+	text-align:right;
+	
+}

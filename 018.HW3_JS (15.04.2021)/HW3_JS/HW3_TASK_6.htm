@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HW3_Task5</title>
+	<style>
+		div {padding:10px;}
+		p{font-size:2em;}
+	</style>
+</head>
+<!-- Задание_6 : При нажатии на "Ок"  вывести текст  с разным цветом букв(заглавными буквами)  -->
+<body>
+	<div>
+		<input id="inpt" type="text" placeholder="Введите текст">
+		<button id="ok" onclick="newdt()" >Ok</button>
+		<p id="outdata" ></p>
+	</div>
+		
+	<script>
+		const inpt = document.getElementById("inpt");
+		const outdata = document.getElementById("outdata");
+		function rand(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) ) + min;
+            }
+		function newdt(){
+			let wrd = inpt.value.toUpperCase();
+			let wrd1 = "";
+			for (let i = 0; i < wrd.length; i++) {
+				let color = rand(0, 16000000);
+				wrd1 += '<span style="color:#' + color.toString(16) + '">' +wrd[i]+'<span>';
+           }
+		   outdata.innerHTML = wrd1 ;
+		}
+	</script>
+</body>
+
+</html>

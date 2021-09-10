@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HW3_Task5</title>
+	<style>
+		div {padding:10px}
+		input{padding:3px 0;width:350px; border: 2px solid ;}
+	</style>
+</head>
+<!-- Задание_7 : "Бегущая" влево строка  -->
+<body>
+	<div>
+		<input id="inpt" type="text" placeholder="Введите текст." onchange="repl()">
+	</div>	
+	<script>
+		const inpt = document.getElementById("inpt");
+		
+		function repl(){
+			let wrd = inpt.value;
+			//adding "space" infornt of wrd
+			for (let i = 0;i < 70;i++){
+				wrd = " " + wrd;
+			}
+			inpt.value = (wrd) ;
+			//shifting to left		
+			function shiftingleft(){                    
+				for (let i = 69;i >=0 ;  i--){
+					 setTimeout(function(){inpt.value =inpt.value.slice(1,inpt.value.length) } , (70-i)*50);
+				}           
+			} 
+        shiftingleft();				
+		}			
+	</script>
+</body>
+
+</html>

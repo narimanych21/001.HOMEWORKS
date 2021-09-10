@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_6</title>
+    </head>
+    <body>
+        <script>
+			let kod ="";
+			let x1,x2;
+			let n1,n2;
+			let sgn;
+			let flag =true;
+			while (flag){
+			  	do {n1 = prompt("Калькулятор.\nВведите первое число");
+				} 	while ((x1 = +n1) != parseFloat(n1));
+				do {n2 = prompt("Калькулятор.\nВведите второе число число");
+				} 	while ((x2 = +n2) != parseFloat(n2));
+			    do {sgn = prompt("Калькулятор.\nВведите знак действия + - * или /","+");
+				} 	while (sgn != "+" && sgn != "-" && sgn != "*"&& sgn != "/")  ;
+				alert (` ${x1} ${sgn} ${x2}= `+ eval(` ${x1} ${sgn} ${x2}`)); 
+				flag = confirm('Для следующего примера нажмите "OK". \nДля выхода нажмите"Отмена"');   
+			}			
+		</script>
+    </body> 
+</html>

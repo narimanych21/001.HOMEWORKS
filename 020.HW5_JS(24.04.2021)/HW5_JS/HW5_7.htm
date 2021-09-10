@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_7</title>
+    </head>
+    <body>
+        <script>
+			let x1,x2,n;
+			do {x1= prompt("Сдвиг.\nВведите натуральное число");
+				} 	while (isNaN(x1) || x1<=0 || x1!=parseInt(x1));
+			do {n= +prompt("Сдвиг.\nНа сколько цифр сдвинуть?\nДанное число должно быть меньше разряда числа " + x1);
+				} 	while (isNaN(n) || n <=0  || n>= x1.length || n!=parseInt(n));				
+			//--Variant 1--	
+			// alert (x1.slice(n,x1.length)+x1.slice(0,n)); 	
+			
+			//--variant 2 --
+			x2=x1	
+			while (x1 >=10**n){x1=Math.trunc(x1/10);}
+			x2=(x2-x1*10**(x2.length-n))*10**n+x1;
+			alert (`конечное число ${x2}`);			
+		</script>
+    </body>
+</html>

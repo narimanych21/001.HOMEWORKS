@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+	<script>
+		//Задание 1
+
+		class Circle {
+			constructor(r) { this.r = r }
+			set radius(r) { this.r = r; }
+			get radius() { return this.r; }
+			get diametr() { return 2 * this.r; }
+			area() { return (Math.PI * this.r ** 2).toFixed(2); }
+			circumference() { return (2 * Math.PI * this.r).toFixed(2); }
+		}
+
+		let circle = new Circle(10);
+		console.log('радиус =  ' + circle.radius);
+		console.log('диаметр =  ' + circle.diametr);
+		console.log('площадь круга =  ' + circle.area());
+		console.log('длина окружности =  ' + circle.circumference());
+
+		
+	</script>
+</body>
+
+</html>

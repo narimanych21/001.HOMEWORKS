@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html style="overflow:hidden;">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    html,
+    body {
+      margin: 0px;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body id="body">
+  <script>
+    alert('Задание 3' +
+      '\nСоздать html-страницу с футбольным полем, которое занимает всю ширину и высоту экрана, ' +
+      'и мячом размером 100 на 100 пикселей.Сделать так, чтобы при клике мышкой по полю, мяч плавно ' +
+      'перемещался на место клика. Учтите: необходимо, чтобы центр мяча останавливался именно там, ' +
+      ' где был совершен клик мышкой. Также предусмотрите, чтобы мяч не выходил за границы поля');
+
+    document.addEventListener('DOMContentLoaded', function () {
+      let div = document.createElement('div');
+      div.id = 'field';
+      div.style.height = "100%";
+      div.style.overflow = "hidden";
+      div.style.cursor = "pointer";
+      div.style.backgroundImage = 'url("fld2.jpg")';
+      div.style.backgroundRepeat = 'no-repeat';
+      div.style.backgroundAttachment = 'fixed';
+      div.style.backgroundSize = ' 100% 100%';
+      div.style.position = "relative";
+      document.body.appendChild(div);
+      div.addEventListener('click', myFunction);
+
+      let bl = document.createElement('img');
+      bl.src = 'zzz.png';
+      bl.id = 'ball';
+      bl.style.cursor = "pointer";
+      bl.style.position = 'absolute';
+      bl.style.left = '50%';
+      bl.style.top = '50%';
+      bl.style.transform = 'translate(-50%, -50%)';
+      bl.style.width = '100px';
+      bl.style.height = '100px';
+      bl.style.transition = 'all  ease 1.5s';
+      div.appendChild(bl);
+    }, false);
+    function myFunction() {
+      let x = window.event.clientX;
+      let y = window.event.clientY;
+      if (x < 50) x = 50;
+      if (x > field.clientWidth - 50) x = (field.clientWidth - 50);
+      if (y < 50) y = 50;
+      if (y > field.clientHeight - 50) y = (field.clientHeight - 50);
+      ball.style.left = x + 'px';
+      ball.style.top = y + 'px';
+    }
+
+  </script>
+</body>
+
+</html>

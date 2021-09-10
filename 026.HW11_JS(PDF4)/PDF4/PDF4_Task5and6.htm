@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+    //  Task 5.Написать функцию- проверку "совершенного числа"
+	
+	function isPerfectNum(x) {
+                let sum = 0;
+                for(let i = 1; i <= x / 2; i++) {
+                    if(x % i == 0) sum += i;
+                }
+                return (x == sum);
+            }
+	
+	//Task 6.Написать функцию, которая принимает 
+	//минимальное и максимальное значения для диапазона, 
+	//и выводит только те числа из диапазона, которые являются совершенными. 
+	//Используйте написанную ранее функцию, чтобы узнавать, совершенное число или нет.
+	
+	function CatchPerfectNum(a,b){
+		let arr=[];
+		for (let i = a; i <= b; i++){
+		if (isPerfectNum(i)) arr.push(i);
+		}
+		return arr.join();	
+	}
+	
+	alert(CatchPerfectNum(1,38));
+	
+	
+    </script>
+</body>
+</html>

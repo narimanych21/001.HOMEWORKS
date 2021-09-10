@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HW7_1</title>
+		 <style>
+			
+			input{margin:0 0 10px 0;}
+			#ul4 li{  list-style-type: none;}
+	
+        </style>
+    </head>
+    <body onload="loadShoppingList()">
+		<div class="container">
+			<div id="div1">
+				<h3>Список покупок</h3>
+				<ul id="ul1"></ul>
+				<button onclick="sorting()">Сортировать</button>
+				
+			</div>
+			<div id="div2">
+				<h3 id="sorted">Отсортированный список</h3>
+				<ul id="ul2"></ul>
+				
+			</div>
+			<div id="div3">
+				<h3 id="buy">Добавить в список</h3>
+				<input type="text" id="productName" placeholder="Продукт"><br>
+				<input type="number" id="productQty" placeholder="Количество"><br>
+				<select id="stat">
+					<option value="куплено">куплено</option>
+					<option value="не куплено">не куплено</option>
+				</select>	
+				<button onclick="adding()">Добавить</button>
+				
+			</div>
+			<div id="div4">
+				<h3 id="buy">Не куплено</h3>
+				<ul id="ul4"></ul>
+				<button onclick="toBuy()">Купить</button>
+			</div>
+		</div>
+        <script>
+			const ul1 = document.getElementById("ul1");
+			const ul2 = document.getElementById("ul2");
+			const ul4 = document.getElementById("ul4");
+			const sorted = document.getElementById("sorted");
+			const productName = document.getElementById("productName");
+			const productQty = document.getElementById("productQty");
+			const stat = document.getElementById("stat");
+			let kod;
+			let newproduct={};
+			let notBought=[];
+			let shoppingList = [
+				{product: "Картошка", quantity: 5,  uom: "кг", status:"куплено"},
+				{product: "Лук",      quantity: 3,  uom: "кг", status:"не куплено"},
+				{product: "Морковь",  quantity: 2,  uom: "кг", status:"куплено"},
+				{product: "Капуста",  quantity: 2,  uom: "кг", status:"не куплено"},
+				{product: "Яблоки ",  quantity: 4,  uom: "кг", status:"не куплено"},
+				{product: "Бананы",   quantity: 2,  uom: "кг", status:"куплено"},
+				{product: "Помидоры", quantity: 2,  uom: "кг", status:"не куплено"},
+				{product: "Огурцы",   quantity: 2,  uom: "кг", status:"не куплено"},
+				{product: "Алыча",    quantity: 0.5,uom: "кг", status:"куплено"}
+            ]
+			
+			
+			function loadShoppingList(){
+				kod="";
+				for(let i=0;i<shoppingList.length;i++){
+					kod += '<li id="li'+i+ '">' + Object.values(shoppingList[i]).join(",") +'</li>';
+				}
+				ul1.innerHTML = kod;
+			}
+			
+			function sorting(){
+				let sortedList=shoppingList.slice();
+				sortedList=sortedList.sort(sortObj);
+				
+				kod="";
+				for(let i=0;i<sortedList.length;i++){
+				  kod += '<li id="li'+i+ '">' + Object.values(sortedList[i]).join(",") +'</li>';												
+				}
+				ul2.innerHTML = kod;
+				
+				notBought =shoppingList.filter(shoppingList => shoppingList.status == "не куплено");
+				kod="";
+				for(let i=0; i < notBought.length;i++){
+					kod += '<li><input type="checkbox" id ="nb'+ i +'">'+ Object.values(notBought[i]).join(",") +'</li>'
+				}
+				ul4.innerHTML = kod;
+			}
+			
+			function adding(){				
+				newproduct={};
+				newproduct.product=productName.value;
+				newproduct.quantity= +productQty.value ;
+				newproduct.uom = "кг" ;
+				newproduct.status=stat.value  ;
+				comparing(shoppingList,newproduct);
+				
+				loadShoppingList();
+				sorting()
+			}
+			
+			function comparing(a, b) {
+			  let ab = a.find(ab => ab.product == b.product && ab.status == b.status)
+			  if (ab) {
+				ab.quantity +=  + b.quantity;
+			  } else {
+				a.push(b)
+			  }
+			}
+		
+			function toBuy(){
+				let ss = ul4.getElementsByTagName("li");
+				for(let i = 0; i < ss.length; i++){
+					if (document.getElementById('nb'+i).checked){
+						for(let j=0;j<shoppingList.length;j++){
+							if(Object.values(notBought[i]).join(",")==Object.values(shoppingList[j]).join(",")){
+								 shoppingList[j].status= "куплено"; 
+							}
+						}
+					} 
+				}
+			loadShoppingList();
+			sorting()			
+			}
+
+			function sortObj(a, b){
+                return  (a.status > b.status) ? -1 : 1;          
+            }
+	
+        </script>
+    </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<style>
+		.container{
+			position:relative;
+			display: block;
+			width: 700px;
+			height:600x;
+			background-color: #f0f0f0;
+		}
+		.substrate {
+			position:absolute;
+			display: block;
+		
+			min-width:700px;
+			min-height: 295px;
+			background-color: #fff;
+			width:100%;
+			height: 100%;
+			z-index: 1;
+			overflow: auto;
+			font:1em 'Arial';
+			color:#000;
+			border:2px solid #5e5e5e;
+			background-color: #fff;
+		}
+		textarea{
+			position:absolute;
+			display: block;
+			min-width:700px;
+			min-height: 300px;
+			width:100%;
+			height: 100%;
+			z-index: 3;
+			overflow: auto;
+			opacity: 0;
+			font:1em 'Arial';
+			border:2px solid #5e5e5e;
+		 }
+		 #srchfild {
+			display: block;
+			border:2px solid #5e5e5e;
+			height:30px;
+			padding:15px;
+			background-color:
+		 }
+		 span {
+			color:#ff0000;
+			background-color:#c8ff61;
+		
+		 }
+	</style>
+</head>
+
+<body>
+	<div id ="srchfild">
+		<label for="serchtext">Search field:</label>
+ 		<input id="serachText" type="text" id="serchtext" name="serchtext">
+		<button onclick="tst()">search</button>
+	</div>
+	<div id ="container" class="container">
+		<div id ="pd" class="substrate"></div>
+		<textarea id="prima"autofocus ></textarea>
+	</div>
+	
+	<script>
+		const srchfild = document.getElementById('srchfild');
+		const container = document.getElementById('container');
+		const pdd = document.getElementById('pd');
+		const prima = document.getElementById('prima');
+		const serachText = document.getElementById('serachText');
+		
+		new ResizeObserver(resizeHandler).observe(prima);	
+		function resizeHandler() {
+			pdd.style.width = prima.offsetWidth-5 + 'px';
+			pdd.style.height = prima.offsetHeight-12 + 'px';
+			srchfild.style.width = prima.offsetWidth-35 + 'px';
+		}
+
+		prima.addEventListener('keyup', (e)=>pdd.innerText=prima.value);
+		prima.addEventListener('scroll', (e)=>pdd.scrollTop=prima.scrollTop);
+			
+		 function tst(){
+			let smb1=serachText.value;
+			let smb2='';
+			if (smb1!='')smb2='<span>'+smb1+'</span>'; 
+		    pdd.innerHTML = pdd.innerHTML.replaceAll('<span>','').replaceAll('</span>','').replaceAll(smb1,smb2);
+		}
+		
+		 
+		
+		</script>
+</body> 
+
+</html>

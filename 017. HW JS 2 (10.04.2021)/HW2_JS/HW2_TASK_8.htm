@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Task_8 Сircle and square</title>
+    </head>
+    <body>
+        <script>
+			let L = +prompt("Введите длину окружности");
+				if (L <=0 || isNaN(L)) {alert ("Длина окружности введена неправильно.");
+				} else {let P = +prompt("Введите периметр квадрата ");
+						if (P<=0 || isNaN(P)) {alert ("Периметр квадрата введен неправильно.");
+						}else {if ((L/Math.PI).toFixed(2)<(P/4).toFixed(2)) { alert("Окружность поместится в квадрат.") ;
+							}
+							else {alert ("Окружность не поместится в квадрат.");
+							}
+						}
+				}  				
+        </script>
+    </body>
+</html> 

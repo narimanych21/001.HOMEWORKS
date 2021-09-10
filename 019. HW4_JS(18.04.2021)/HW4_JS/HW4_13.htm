@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW4_15JS</title>
+        <style>
+            table {border-collapse: collapse;}
+            td { width: 50px; height: 50px; border: 2px solid #000; text-align: center;}
+        </style>
+    </head>
+    <body>
+        <table id="tbl"></table>
+
+        <script>
+            const tbl = document.getElementById("tbl");
+            let kod = "";
+			for(let i= 1; i <= 4; i++){
+				let x = 0;
+                kod += "<tr>";
+                for(let j = 1; j <= 4; j++) {	
+					kod += (i % 2 )? "<td></td>" :'<td bgcolor="#23b14d"></td>';
+                }
+                kod += "</tr>";
+            } 
+            tbl.innerHTML = kod;
+        </script>
+    </body>
+</html>

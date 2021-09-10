@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HW5_8</title>
+    </head>
+    </head>
+    <body>
+        <script>
+			let day=1;
+			let weekDay="понедельник";
+			let flag =true;
+			while (flag){
+					weekDay=(day==1) ? "понедельник":
+							(day==2) ? "вторник":	
+							(day==3) ? "среда":
+							(day==4) ? "четверг":
+							(day==5) ? "пятница":
+							(day==6) ? "суббота":
+							(day==7) ? "воскресенье":"";
+					alert(weekDay);		
+					flag = confirm('Хотите увидеть следующий день?');		
+					if (flag) {day=( day==7) ? 1:++day;}						 		
+			}				
+		</script>
+
+    </body> 
+</html>

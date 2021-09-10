@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+        alert('Задание 6' +
+            '\nСоздать html-страницу с несколькими кнопками.' +
+            'При наведении на кнопку, должна появляться подсказка ' +
+            'с текстом. По умолчанию – подсказка появляется сверху от кнопки. ' +
+            'Но если она не помещается сверху от кнопки, тогда отображается снизу');
+
+
+        class Btn {
+            constructor(id, caption, margin, tooltip) {
+                this.id = id;
+                this.caption = caption;
+                this.margin = margin;
+                this.tooltip = tooltip;
+            }
+            create() {
+                let elem = document.createElement("button");
+                elem.id = this.id;
+                elem.innerText = this.caption;
+                elem.dataset.tooltip = this.tooltip;
+                elem.style.display = 'block';
+                elem.style.margin = this.margin;
+                elem.style.background = "orange";
+                elem.style.width = "100px";
+                elem.style.height = "50px";
+                document.body.appendChild(elem);
+            }
+        }
+        let btn1 = new Btn('btn1', 'button1', '0 50px', 'Tool tip 1');
+        let btn2 = new Btn('btn2', 'button2', '0 250px', 'Tool tip 2');
+        btn1.create();
+        btn2.create();
+
+        let elem;
+        document.onmouseover = function (event) {
+            if (event.target.dataset.tooltip) {
+                elem = document.createElement('div');
+                elem.innerText = event.target.dataset.tooltip;
+                elem.style.position = 'absolute';
+                elem.style.padding = '10px';
+                elem.style.textAlign = 'center';
+                elem.style.color = '#fff';
+                elem.style.background = '#993c91';
+                document.body.append(elem);
+
+                let y = (event.target.offsetTop - elem.offsetHeight - 5) < 0 ?
+                    event.target.offsetTop + event.target.offsetHeight + 5 :
+                    event.target.offsetTop - elem.offsetHeight - 5;
+
+                let x = (event.target.offsetLeft + (event.target.offsetWidth - elem.offsetWidth) / 2) < 0 ? 0 :
+                    event.target.offsetLeft + (event.target.offsetWidth - elem.offsetWidth) / 2;
+
+                elem.style.top = y + 'px';
+                elem.style.left = x + 'px';
+            }
+        };
+        document.addEventListener('mouseout', (e) => { if (elem) elem.remove() });
+
+    </script>
+</body>
+
+</html>

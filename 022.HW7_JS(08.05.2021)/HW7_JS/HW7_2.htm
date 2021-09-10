@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+         
+      
+			.w1{width:150px;}
+			.w2{width:50px;text-align:center}
+			.w3{width:80px; align;text-align:center}
+			
+
+        </style>
+    </head>
+    <body onload="loadreceipt()">
+        <table id="table"></table>
+		<h4 id="totprice"></h4>
+		<h4 id="maxprice"></h4>
+		<h4 id="aver"></h4>
+		
+        <script>
+            const table = document.getElementById("table");
+			const totprice= document.getElementById("totprice");
+			const maxprice= document.getElementById("maxprice");
+			const aver= document.getElementById("aver");
+            let kod = "";
+		
+			let receipt = [
+				{product: "Картошка",       quantity: 5,  uom: "кг", ppu:2.5  },
+				{product: "Лук",            quantity: 3,  uom: "кг", ppu:3.25 },
+				{product: "Морковь",        quantity: 2,  uom: "кг", ppu:4    },
+				{product: "Капуста",        quantity: 2,  uom: "кг", ppu:1.25 },
+				{product: "Яблоки ",        quantity: 4,  uom: "кг", ppu:2.1},
+				{product: "шоколад",        quantity: 2,  uom: "шт", ppu:1.3},
+				{product: "яйца (куриныя)", quantity: 2,  uom: "кг", ppu:0.12},	
+            ]
+			
+			function loadreceipt(){
+				kod=	'<h3>Чек</h3>'+
+						'<tr id ="head">'+
+						'<td class="w1">Наименование продукта</td>'+
+						'<td class="w2">Количество</td>'+
+						'<td class="w2">Ед.измерения</td>'+
+						'<td class="w2">Цена за ед. изм.</td>'+
+						'<td class="w3">Цена</td>'
+						+'</tr>';
+				
+				for(let i=0;i<receipt.length;i++){
+						receipt[i].price=receipt[i].quantity*receipt[i].ppu;
+						kod += '<tr>'+
+						'<td class="w1">' +receipt[i].product+'</td>'+
+						'<td class="w2">'+receipt[i].quantity+'</td>'+
+						'<td class="w2">'+receipt[i].uom+'</td>'+
+						'<td class="w2">'+receipt[i].ppu+'</td>'+
+						'<td class="w3">'+receipt[i].price+'</td>'
+						+'</tr>';
+				}
+				table.innerHTML = kod;
+				total();
+				morExpensive();
+            }
+			function total(){
+				let sum=0;
+				for(let i=0;i<receipt.length;i++)sum+=receipt[i].quantity*receipt[i].ppu;
+				totprice.innerHTML= `Итого:   ${sum}`;
+				aver.innerHTML='Средняя стоимость одного товара =   '+ (sum /receipt.length).toFixed(2)	
+			}
+
+			function morExpensive(){
+				let findmax =[]
+				for(let i=0; i<receipt.length ;i++){
+					findmax.push(receipt[i].price);
+				}
+				findmax.sort(function(a, b){return b - a});
+				let morEx= receipt.find(function(rec,index){
+					if (rec.price == findmax[0]) return true;
+				});
+				//maxprice.innerHTML= 'Самая дорогая покупка:  '+ Object.values(morEx).join ("  ");
+				maxprice.innerHTML= 'Самая дорогая покупка:  '+ morEx.product+  ' за  '+ morEx.price;	
+			}
+			
+			
+			
+			
+			
+			
+        </script>
+    </body>
+</html>

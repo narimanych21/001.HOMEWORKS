@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap');
+:root { --sky: #6bc2f1 }
+header { background: url('../img/headerbg.jpg') center/cover }
+header .card { padding-top: 10em}
+.navbar { background: rgba(255,255,255, .8) }
+.navbar .nav-link { color: #252525; font-weight: bold }
+.navbar-brand { padding-top: 0 }
+
+#image1 { background: url('../img/image1.jpg') center/cover }
+#image2 { background: url('../img/image2.jpg') center/cover }
+#image1:hover, #image2:hover { opacity: .5}
+#image1:hover h4, #image2:hover h4 { display: block!important }
+#portfolio { background:#f1f1f1}
+#port1{background: url('../img/port1.jpg') center/cover }
+#port2{background: url('../img/lab1.jpg') center/cover }
+#port3{background: url('../img/lab2.jpg') center/cover }
+#port4{background: url('../img/image2.jpg') center/cover }
+#port5{background: url('../img/image1.jpg') center/cover }
+#port6{background: url('../img/lab3.jpg') center/cover }
+   
+#review{ background-color: var(--sky) }
+#contact{ background-color: #fff }
+#contact .container {padding:5% 15%}
+#contact button{color: var(--sky); border-color:var(--sky);}
+ footer{ background-color: #072135 }
+ 
+.bg-sky { background-color: var(--sky) }
+.text-sky { color: var(--sky) }
+.fs-1 { font-size: calc(2rem + 1.5vw)!important }
+.fs-2 { font-size: calc(2rem + 1.5vw)!important }
+.vh-30 { height: 30vh }
+.vh-50 { height: 50vh }
+.vh-75{ height: 75vh }
+.home .carousel-item{
+	min-height:75vh;
+	background-position: center;
+	background-size: cover;
+	color:#fff;
+	position:relative;
+	z-index:1;
+}
+.home .carousel-item .container{
+	position:absolute;
+	left: 50%;
+	top: 40%;
+	transform:translate(-50%,-50%);
+	text-align:center;
+	padding: 14%;
+}
+
+.home .carousel-contrlos{
+	position:absolute;
+	left:50%;
+	bottom:20px;
+	z-index:10;
+	transform: translateX(-50%);
+}
+
+.home .carousel-indicators{position:relative;margin:0;}
+.home .carousel-indicators button{
+	height:calc(2rem + 1.5vw);
+	width:calc(2rem + 1.5vw);
+	border-radius:50%;
+	margin: 0 5px;
+	background-position:center;
+	background-size:cover;	
+}
+.home .carousel-indicators button.active{transform:scale(1.4)}
+.home .carousel-control-next{right:-15%;}
+.home .carousel-control-prev{left:-15%;}
+.carousel-inner h1{ font: 8em Roboto;line-height:0;}
+.carousel-inner h4{ font: 1.4em Roboto;}
+.carousel-inner h5{font: 1.2em Roboto;	color:#d4ebfa;}
+.carousel-inner p{font: 1em Roboto;}
+	
+} 
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Task_9 Quiz</title>
+        <style>
+			div {padding:50px; }
+			fieldset{margin:20px 0;border:none;}
+		</style>
+    </head>
+    <body>
+		<div >
+			
+			
+			
+			<fieldset id="field1"><legend> 1.Как звали папу Алексардра Сергеевича Пушкина</legend>
+				<label><input name="papa" type="radio" id="option11" /> Алексардр </label>
+				<label><input name="papa" type="radio" id="option12" /> Сергей</label>
+				<label><input name="papa" type="radio" id="option13" /> Толик</label>
+			</fieldset>
+				
+			<fieldset id="field2"><legend> 2.Как звали маму Алексардра Сергеевича Пушкина</legend>
+				<label><input name="mama" type="radio" id="option21"/> Вера</label>
+				<label><input name="mama" type="radio" id="option22" /> Надежда </label>
+				<label><input name="mama" type="radio" id="option23"/> Любовь</label>
+			</fieldset>	
+
+			<fieldset id="field3"><legend> 3.Как звали жену Алексардра Сергеевича Пушкина</legend>
+				<label><input name="wife" type="radio" id="option31"/> Мария</label>
+				<label><input name="wife" type="radio" id="option32"/> Елизавета </label>
+				<label><input name="wife" type="radio" id="option33"/> Наталья</label>
+			</fieldset>	
+			<button id="submit" onclick="pointsCeck()">Завершить</button>
+			<p id="answ"></p>
+		</div>
+
+
+		<script>
+			const option12 = document.getElementById("option12");
+			const option22 = document.getElementById("option22");
+			const option33 = document.getElementById("option33");
+			const ANSW = document.getElementById("answ");
+			
+					
+			function pointsCeck(){
+				let countr=0;
+				if (option12.checked == true) {countr++;}
+				if (option22.checked == true) {countr++;}
+				if (option33.checked == true) {countr++;}
+				
+				
+				(countr==0) ? ANSW.innerHTML = "Вы набрали 0 баллов из 6":
+				(countr*2 == 2 || countr*2 == 4) ? (ANSW.innerHTML = `Вы набрали ${countr*2} балла из 6`):ANSW.innerHTML = "Вы набрали 6 баллов из 6  МАЛАДЕС!";
+				
+			
+			}
+		
+		
+		
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+
+</head>
+
+<body>
+	<script>
+		//Задание 3
+		class CssClass {
+			constructor(name) {
+				this.name = name;
+				this.style = [];
+			}
+
+			setStyle(prop, val) {
+				let obj = {}
+				obj[prop] = val;
+				this.style.push(obj);
+			}
+
+			delStyle(prop) {
+				this.style = this.style.filter(item => Object.keys(item)[0] != prop);
+			}
+			getCss() {
+				return '\n.' + this.name + '{' + this.style.map(item => Object.keys(item)[0] + ":" + Object.values(item)[0]).join(";\n") + '\n}';
+			}
+		}
+		let wrap = new CssClass("wrap");
+		wrap.setStyle("display", "flex");
+		wrap.setStyle("width", "300px");
+		//wrap.delStyle("width");
+
+		let block = new CssClass("block");
+		block.setStyle("width", "100px");
+		document.write(wrap.getCss());
+		document.write(block.getCss());
+
+
+
+	</script>
+</body>
+
+</html>

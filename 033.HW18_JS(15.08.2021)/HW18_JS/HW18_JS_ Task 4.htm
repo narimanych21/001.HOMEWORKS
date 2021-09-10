@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+
+</head>
+
+<body>
+	<script>
+		//___________________________________________
+		class HtmlElement {
+			constructor(name, closed, text = "") {
+				this.name = name;
+				this.closed = closed;
+				this.text = text;
+				this.attr = [];
+				this.inner = [];
+			}
+
+			setAttr(prop, val) {
+				let obj = {};
+				obj[prop] = val;
+				this.attr.push(obj);
+			}
+			setElem(elem, method) {
+				if (method == "append") {
+					this.inner.push(elem);
+				} else if (method == "prepend") {
+					this.inner.unshift(elem);
+				}
+			}
+
+			getHtml() {
+				let attr = this.attr.map(item => Object.keys(item)[0] + '= "' + Object.values(item)[0] + '"').join(" ");
+				let inner = this.inner.map(item => item.getHtml()).join("");
+				return this.closed ? `<${this.name}  ${attr} >${this.text} ${inner}</${this.name}>` :
+					`<${this.name}  ${attr} />`;
+			}
+
+		}
+
+
+		let div1 = new HtmlElement("div", true);
+		div1.setAttr("id", "wrapper");
+		div1.setAttr("class", "wrap");
+
+		let div2 = new HtmlElement("div", true);
+		div2.setAttr("class", "block");
+
+
+		let img1 = new HtmlElement("img", false);
+		img1.setAttr("class", "img");
+		img1.setAttr("src", "Lipsum.jpg");
+		img1.setAttr("alt", "Lorem Ipsum");
+
+
+		let a1 = new HtmlElement("a", true, "More...");
+		a1.setAttr("href", "htpps://www.lipsum.com/");
+		a1.setAttr("target", "_blank");
+
+
+		let p1 = new HtmlElement("p", true, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+		p1.setAttr("class", "text");;
+
+		let h3 = new HtmlElement("h3", true, "What is the Lorem Ipsum?");
+
+		div1.setElem(div2, "append");
+		div2.setElem(img1, "append");
+		div2.setElem(p1, "append");
+		div2.setElem(h3, "prepend");
+		p1.setElem(a1, "append");
+
+
+		//_____________________________________________________________
+		class CssClass {
+			constructor(name) {
+				this.name = name;
+				this.style = [];
+			}
+
+			setStyle(prop, val) {
+				let obj = {}
+				obj[prop] = val;
+				this.style.push(obj);
+			}
+
+			delStyle(prop) {
+				this.style = this.style.filter(item => Object.keys(item)[0] != prop);
+			}
+			getCss() {
+				return '\n.' + this.name + '{\n   ' + this.style.map(item => Object.keys(item)[0] + ":" + Object.values(item)[0]).join(";\n   ") + ';\n}';
+			}
+		}
+		let wrap = new CssClass("wrap");
+		wrap.setStyle("display", "flex");
+		wrap.setStyle("width", "300px");
+
+		let block = new CssClass("block");
+		block.setStyle("width", "100px");
+
+		let img = new CssClass("img");
+		img.setStyle("width", "100%");
+
+		let txt = new CssClass("text");
+		txt.setStyle("text-align", "justify");
+
+		class HtmlBlock {
+			constructor(root, styles = []) {
+				this.root = root;
+				this.style = styles;
+			}
+			getCode() {
+				let kod = '<style>' + this.style.map(item => item.getCss()).join('\n') + '</style>';
+				kod += this.root.getHtml();
+				return kod;
+			}
+		}
+
+		let htmblock1 = new HtmlBlock(div1, [wrap, block, img, txt]);
+		document.write(htmblock1.getCode());
+
+
+	</script>
+</body>
+
+</html>

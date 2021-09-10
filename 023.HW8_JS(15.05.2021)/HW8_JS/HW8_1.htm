@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>HW8_1</title>
+ 
+    </head>
+    <body onload="carInfo()" >
+		<div >
+			<h2 id="inf"></h2>	
+			<button onclick = "timeSpend ()"> Estimated traveling time for </button>
+			<input type="number" id="distance" placeholder="Distance (km)"><br>	
+			<p id="travelTime"></p>
+		</div>
+		
+        <script>
+			const inf = document.getElementById("inf");
+			const distance = document.getElementById("distance");
+			const travelTime = document.getElementById("travelTime");
+			
+			let car = {manufacturer:"Opel", model:"Corsa",issueYear:2018 ,avSpeed: "90km/h" };
+		
+			function carInfo( ){
+				inf.innerHTML = Object.entries(car).join(" | ").replaceAll(",","-") ;
+			 }
+				
+			function timeSpend( ){
+				let s=distance.value;
+				let v= parseFloat(car.avSpeed);
+				let hrs = Math.trunc(s/v) + Math.trunc(s/(4*v));
+				let min =Math.round(.6*(s%v));
+				travelTime.innerHTML='Estimated traveling time  with average speed ' + car.avSpeed +' for ' + s +' km = ' + hrs + " hrs " + min +" min";		
+			}
+	
+        </script>
+    </body>
+</html>
